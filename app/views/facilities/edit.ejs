@@ -1,0 +1,9 @@
+<div class="page-header"><h1>Edit Facility</h1></div>
+
+<% form_for(facility, {action: path_to.facility(facility), method: 'PUT', id: "facility_form", class: 'form-horizontal'}, function (form) { %>
+    <%- partial('facilities/form.ejs', {locals: {form: form, facility: facility, state_or_province_list: state_or_province_list, country_list: country_list}}) %>
+    <div class="form-actions">
+        <%- form.submit('<i class="icon-ok icon-white"></i> Update Facility', {class: 'btn btn-primary'}) %> or
+        <%- link_to('Cancel', path_to.facilities(), {class: 'btn'}) %>
+    </div>
+<% });%>

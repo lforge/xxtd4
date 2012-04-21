@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><%= title %></title>
+        <%- stylesheet_link_tag('bootstrap', 'style', 'bootstrap-responsive', 'bootstrap.min', 'ui-lightness/jquery-ui-1.8.18.custom') %>
+        <%- javascript_include_tag('jquery-1.7.1.min', 'jquery-ui-1.8.18.custom.min', 'bootstrap', 'rails', 'application', 'xxtd_eventUtility', 'bootstrap-dropdown', 'bootstrap-modal') %>
+        <%- csrf_meta_tag() %>
+    </head>
+    <body>
+
+      <%- partial('menu.ejs') %>
+            
+        <div class="container">
+            <% var flash = request.flash('info').pop(); if (flash) { %>
+                <div class="alert alert-info">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <%- flash %>
+                </div>
+            <% } %>
+            
+            <% flash = request.flash('error').pop(); if (flash) { %>
+                <div class="alert alert-error">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <%- flash %>
+                </div>
+            <% }; %>
+            
+            <%- body %>
+
+<script>
+    // Activate the bootsrap dropdown JQuery plug-in.
+    $(document).ready(function () {
+        $(".dropdown-toggle").dropdown();
+    });
+
+    // Activate the JQuery date picker.
+    $(function() {
+		  $("#start_date_pick").datepicker({
+        altField: "#Tournament_start_date"
+       ,altFormat: "@"
+      });
+    });
+    $(function() {
+		  $("#end_date_pick").datepicker({
+        altField: "#Tournament_end_date"
+       ,altFormat: "@"
+      });
+    });
+
+</script>
+
+            <hr />
+            <footer>
+                <p><%= xxtd_DisplayFooter() %></p>
+            </footer>
+        </div>
+    </body>
+</html>

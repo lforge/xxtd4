@@ -1,0 +1,193 @@
+<%- errorMessagesFor(player) %>
+
+<div class="row">
+
+<div class = "span6">
+<div class="control-group">
+   <%- form.label("first_name", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("first_name") %>
+   </div>
+</div>
+
+</div> <!-- end of span6 column 1 -->
+
+<div class = "span6">
+<div class="control-group">
+   <%- form.label("last_name", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("last_name") %>
+   </div>
+</div>
+</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row1" -->
+
+<div class = "row">
+<div class = "span6">
+<div class="control-group">
+   <%- form.label("address1", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("address1") %>
+   </div>
+</div>
+</div> <!-- end of span6 column 1 -->
+<div class = "span6">
+<div class="control-group">
+   <%- form.label("address2", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("address2") %>
+   </div>
+</div>
+</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row2" -->
+
+<div class = "row">
+<div class = "span6">
+<div class="control-group">
+   <%- form.label("city", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("city") %>
+   </div>
+</div>
+</div> <!-- end of span6 column 1 -->
+<div class = "span6">
+<div class="control-group">
+   <%- form.label("state_or_province", false, {class: "control-label"}) %>
+   <div class="controls">
+     <%- xxtd_createDropDown("state_or_province", player, state_or_province_list, player.state_or_province) %>
+   </div>
+</div>
+</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row3" -->
+
+<div class = "row">
+<div class = "span6">
+<div class="control-group">
+   <%- form.label("postal_code", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("postal_code") %>
+   </div>
+</div>
+</div> <!-- end of span6 column 1 -->
+<div class = "span6">
+<div class="control-group">
+  <%- form.label("country_code", false, {class: "control-label"}) %>
+  <div class="controls">
+     <%- xxtd_createDropDown("country_code", player, country_list, player.country_code) %>
+  </div>
+</div>
+</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row4" -->
+
+<div class = "row">
+<div class = "span6">
+<div class="control-group">
+   <%- form.label("usatt_number", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("usatt_number") %>
+   </div>
+</div>
+</div> <!-- end of span6 column 1 -->
+<div class = "span6">
+<div class="control-group">
+<!--   <%- form.label("usatt_expiredate", false, {class: "control-label"}) %>-->
+   <label for="usatt_expiredate_pick" class="control-label">USATT Expiration Date</label>
+   <div class="controls">
+       <input type="text" id="usatt_expiredate_pick" value="<%= xxtd_UtcToHumanDate(player.usatt_expiredate) %>">
+   </div>
+</div>
+</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row5" -->
+
+<div class = "row">
+<div class = "span6">
+<div class="control-group">
+   <%- form.label("usatt_rating", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("usatt_rating") %>
+   </div>
+</div>
+</div> <!-- end of span6 column 1 -->
+<div class = "span6">
+<div class="control-group">
+<!--   <%- form.label("rating_asof_date", false, {class: "control-label"}) %>-->
+   <label for="rating_asof_date_pick" class="control-label">Rating As Of Date</label>
+   <div class="controls">
+       <input type="text" id="rating_asof_date_pick" value="<%= xxtd_UtcToHumanDate(player.rating_asof_date) %>">
+   </div>
+</div>
+</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row6" -->
+
+<div class = "row">
+<div class = "span6">
+<div class="control-group">
+  <%- form.label("birth_date", false, {class: "control-label"}) %>
+  <div class="controls">
+       <input type="text" id="birth_date_pick" value="<%= xxtd_UtcToHumanDate(player.birth_date) %>">
+  </div>
+</div>
+</div> <!-- end of span6 column 1 -->
+<div class = "span6">
+
+<div class="control-group">
+   <%- form.label("sex_code", false, {class: "control-label"}) %>
+   <div class="controls">
+       <!-- <%- form.input("sex_code") %> -->
+     <%- xxtd_createDropDown("sex_code", player, sex_list, player.sex_code) %>
+   </div>
+</div>
+</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row7" -->
+
+<div class = "row">
+<div class = "span6">
+<div class="control-group">
+   <%- form.label("home_club", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("home_club") %>
+   </div>
+</div>
+</div> <!-- end of span6 column 1 -->
+<div class = "span6">
+<div class="control-group">
+   <%- form.label("email", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("email") %>
+   </div>
+</div>
+</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row8" -->
+
+<div class = "row">
+<div class = "span6">
+</div> <!-- end of span6 column 1 -->
+<div class = "span6">
+</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row9" -->
+
+<div class = "row">
+<div class = "span6">
+<div class="control-group">
+   <%- form.label("mobile_phone", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("mobile_phone") %>
+   </div>
+</div>
+</div> <!-- end of span6 column 1 -->
+<div class = "span6">
+<div class="control-group">
+   <%- form.label("home_phone", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("home_phone") %>
+   </div>
+</div>
+</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row10" -->
+
+<!-- Hidden field to capture the user choice on rating_asof_date and usatt_expire_date field. -->
+<%- form.input("rating_asof_date", {type: "hidden"}) %>
+<%- form.input("usatt_expiredate", {type: "hidden"}) %>
+<%- form.input("birth_date", {type: "hidden"}) %>
+<%- form.input("date_created", {type: "hidden"}) %>
+<%- form.input("date_updated", {type: "hidden"}) %>

@@ -1,0 +1,34 @@
+<div class="page-header">
+    <h1>Details of a Player</h1>
+</div>
+
+
+<table class="table table-bordered">
+    <tbody>
+        <tr><th>Player ID</th><td><%= player.id %></td></tr>
+        <tr><th>First Name</th><td><%= player.first_name %></td></tr>
+        <tr><th>Last Name</th><td><%= player.last_name %></td></tr>
+        <tr><th>USATT #</th><td><%= player.usatt_number %></td></tr>
+        <tr><th>Address1</th><td><%= player.address1 %></td></tr>
+        <tr><th>Address2</th><td><%= player.address2 %></td></tr>
+        <tr><th>City</th><td><%= player.city %></td></tr>
+        <tr><th>State</th><td><%= player.state_or_province %></td></tr>
+        <tr><th>Postal Code</th><td><%= player.postal_code %></td></tr>
+        <tr><th>Birth Date</th><td><%= xxtd_UtcToHumanDate(player.birth_date) %></td></tr>
+        <tr><th>Sex</th><td><%= sex_code_meaning %></td></tr>
+        <tr><th>USATT Rating</th><td><%= player.usatt_rating %></td></tr>
+        <tr><th>Rating AsOf Date</th><td><%= xxtd_UtcToHumanDate(player.rating_asof_date) %></td></tr>
+        <tr><th>USATT Expiration Date</th><td><%= xxtd_UtcToHumanDate(player.usatt_expiredate) %></td></tr>
+        <tr><th>Home Club</th><td><%= player.home_club %></td></tr>
+        <tr><th>Email</th><td><%= player.email %></td></tr>
+        <tr><th>Home Phone</th><td><%= player.home_phone %></td></tr>
+        <tr><th>Mobile Phone</th><td><%= player.mobile_phone %></td></tr>
+    </tbody>
+</table>
+
+<div class="well">
+    <%- link_to('<i class="icon-edit icon-white"></i> Edit', path_to.edit_player(player), {class: 'btn btn-primary'}) %>
+    <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.player(player), {class: 'btn btn-danger', method: 'delete', remote: true, jsonp: '(function (u) { location.href = u; })'}) %>
+    or
+    <%- link_to('Back to index', path_to.players()) %>
+</div>

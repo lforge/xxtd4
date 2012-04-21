@@ -1,0 +1,25 @@
+<div class="page-header">
+    <h1>Details of a Facility</h1>
+</div>
+
+
+<table class="table table-bordered">
+    <tbody>
+        <!--<tr><th>id</th><td><%= facility.id %></td></tr> -->
+        <tr><th>Facility Code</th><td><%= facility.facility_code %></td></tr>
+        <tr><th>Facility Name</th><td><%= facility.facility_name %></td></tr>
+        <tr><th>Number of Tables</th><td><%= facility.number_of_tables %></td></tr>
+        <tr><th>Address1</th><td><%= facility.address1 %></td></tr>
+        <tr><th>Address2</th><td><%= facility.address2 %></td></tr>
+        <tr><th>City</th><td><%= facility.city %></td></tr>
+        <tr><th>State</th><td><%= facility.state_or_province %></td></tr>
+        <tr><th>Postal Code</th><td><%= facility.postal_code %></td></tr>
+    </tbody>
+</table>
+
+<div class="well">
+    <%- link_to('<i class="icon-edit icon-white"></i> Edit', path_to.edit_facility(facility), {class: 'btn btn-primary'}) %>
+    <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.facility(facility), {class: 'btn btn-danger', method: 'delete', remote: true, jsonp: '(function (u) { location.href = u; })'}) %>
+    or
+    <%- link_to('Back to index', path_to.facilities()) %>
+</div>

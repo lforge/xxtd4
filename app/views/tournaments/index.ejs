@@ -1,0 +1,45 @@
+<div class="page-header">
+    <h1>List of Tournaments</h1>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <p><%- link_to('<i class="icon-plus icon-white"></i> New Tournament', path_to.new_tournament(), {class: 'btn btn-primary'}) %></>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <% if (tournaments.length > 0) { %>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Star Rating</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% tournaments.forEach(function (tournament) { %>
+                        <tr>
+                            <td><strong><%- link_to(tournament.tournament_name, path_to.tournament(tournament)) %></strong></td>
+                            <td><%= xxtd_UtcToHumanDate(tournament.start_date) %></td>
+                            <td><%= xxtd_UtcToHumanDate(tournament.end_date) %></td>
+                            <td><%= tournament.usatt_star_rating %></td>
+                            <td>
+                                <%- link_to('<i class="icon-edit"></i> Edit', path_to.edit_tournament(tournament), {class: 'btn btn-mini'}) %>
+                                <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.tournament(tournament), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>        
+                            </td>
+                        </tr>
+                    <% }); %>        
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="alert alert-block alert-info">
+                <strong>No tournaments were found.</strong> 
+            </p>
+        <% } %>
+    </div>
+</div>

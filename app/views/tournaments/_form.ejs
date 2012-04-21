@@ -1,0 +1,39 @@
+<%- errorMessagesFor(tournament) %>
+<div class="control-group">
+   <%- form.label("tournament_name", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("tournament_name") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("start_date", false, {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("start_date") %>-->
+     <input type="text" id="start_date_pick" value="<%= xxtd_UtcToHumanDate(tournament.start_date) %>">
+   </div>
+</div>
+
+<div class="control-group">
+   <%- form.label("end_date", false, {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("end_date") %>-->
+     <input type="text" id="end_date_pick" value="<%= xxtd_UtcToHumanDate(tournament.end_date) %>">
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("usatt_star_rating", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("usatt_star_rating") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("facility_id", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("facility_id") %>
+   </div>
+</div>
+
+<%- form.input("start_date", {type: "hidden"}) %>
+<%- form.input("end_date", {type: "hidden"}) %>
+<%- form.input("date_created", {type: "hidden"}) %>
+<%- form.input("date_updated", {type: "hidden"}) %>

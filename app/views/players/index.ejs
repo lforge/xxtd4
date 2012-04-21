@@ -1,0 +1,55 @@
+<div class="page-header">
+    <h1>List of Players</h1>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <p><%- link_to('<i class="icon-plus icon-white"></i> New Player', path_to.new_player(), {class: 'btn btn-primary'}) %></>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <% if (players.length > 0) { %>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Player ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>USATT #</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>USATT</br>Rating</th>
+                        <th>Home Club</th>
+                        <th>Sex</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% players.forEach(function (player) { %>
+                        <tr>
+                            <td><strong><%- link_to(player.id, path_to.player(player)) %></strong></td>
+                            <td><%= player.first_name %></td>
+                            <td><%= player.last_name %></td>
+                            <td><%= player.usatt_number %></td>
+                            <td><%= player.city %></td>
+                            <td><%= player.state_or_province %></td>
+                            <td><%= player.usatt_rating %></td>
+                            <td><%= player.home_club %></td>
+                            <td><%= player.sex_code_m %></td>
+                            <td>
+                                <%- link_to('<i class="icon-edit"></i> Edit', path_to.edit_player(player), {class: 'btn btn-mini'}) %>
+                                <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.player(player), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>        
+                            </td>
+                        </tr>
+                    <% }); %>        
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="alert alert-block alert-info">
+                <strong>No players were found.</strong> 
+            </p>
+        <% } %>
+    </div>
+</div>

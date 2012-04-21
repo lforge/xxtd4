@@ -1,0 +1,53 @@
+<div class="page-header">
+    <h1>List of Facilities</h1>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <p><%- link_to('<i class="icon-plus icon-white"></i> New Facility', path_to.new_facility(), {class: 'btn btn-primary'}) %></>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <% if (facilities.length > 0) { %>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Facility</br>Code</th>
+                        <th>Name</th>
+                        <th>Address1</th>
+                        <th>Address2</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Postal</br>Code</th>
+                        <th>Number</br>of Tables</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% facilities.forEach(function (facility) { %>
+                        <tr>
+                            <td><strong><%- link_to(facility.facility_code, path_to.facility(facility)) %></strong></td>
+                            <td><%= facility.facility_name %></td>
+                            <td><%= facility.address1 %></td>
+                            <td><%= facility.address2 %></td>
+                            <td><%= facility.city %></td>
+                            <td><%= facility.state_or_province %></td>
+                            <td><%= facility.postal_code %></td>
+                            <td><%= facility.number_of_tables %></td>
+                            <td>
+                                <%- link_to('<i class="icon-edit"></i> Edit', path_to.edit_facility(facility), {class: 'btn btn-mini'}) %>
+                                <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.facility(facility), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>
+                            </td>
+                        </tr>
+                    <% }); %>        
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="alert alert-block alert-info">
+                <strong>No facilities were found.</strong> 
+            </p>
+        <% } %>
+    </div>
+</div>
