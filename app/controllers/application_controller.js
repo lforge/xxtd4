@@ -5,7 +5,9 @@
 // Name            Date       Description
 // --------------- ---------- ------------------------------------------------------------------------------
 // Jude Lam        03/31/2012 - Initial creation.
-// Jude Lam        04/16/2012 - Move loadxxx functions from <model>_controller.js to here.
+// Jude Lam        04/16/2012 - Moved loadxxx functions from <model>_controller.js to here.
+// Jude Lam        04/21/2012 - Added the loadFacilityList function.
+//                            - Added the loadUSATTStarList function.
 
 before('protect from forgery', function () {
     protectFromForgery('b01ad3d4b1c2c4bc37460acab9b07e039959ffae');
@@ -15,6 +17,8 @@ publish('loadStateList', loadStateList);
 publish('loadCountryList', loadCountryList);
 publish('loadSexList', loadSexList);
 publish('getLookupMeaning', getLookupMeaning);
+publish('loadFacilityList', loadFacilityList);
+publish('loadUSATTStarList', loadUSATTStarList);
 
 
 // loadStateList() will setup the JSON object for list of state.  For now, this is only working for US states.
@@ -58,4 +62,24 @@ function getLookupMeaning(lkup_type, lkup_code, lkup_context, callback) {
         next();
 	    }.bind(this));
     } // end of if (lkup_context == null) check
+}
+
+// loadFacilityList() will setup the JSON object for list of Facilities.
+function loadFacilityList() {
+	Facility.all(function(err, results){
+	 this.facility_list = results;
+   var empty_facility = new Facility();
+   empty_facility.facility_name = 'Not Selected';
+   empty_facility.id = "";
+   this.facility_list.unshift(empty_facility);  // add the new empty Not Selected list to the top of the array.
+	 next(); // process the next tick.  If you don't put it here, it will stuck at this point.
+	}.bind(this));
+}
+
+// loadUSATTStarList() will setup the JSON object for list of USATT Star Rating Code.
+function loadUSATTStarList() {
+	Lookup.all({where: {'lookup_type':'USATT_STAR'}}, function(err, lookups){
+	 this.usatt_star_list = lookups;
+	 next(); // process the next tick.  If you don't put it here, it will stuck at this point.
+	}.bind(this));
 }

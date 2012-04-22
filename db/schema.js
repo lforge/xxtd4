@@ -132,10 +132,25 @@ var Tournament = describe('Tournament', function () {
     property('tournament_name', String);
     property('start_date', Number);
     property('end_date', Number);
-    property('usatt_star_rating', Number, {default: '0' });
+    property('usatt_star_rating_code', String, {default: '0' });
     property('facility_id', Number);
     property('date_created', Number);
     property('date_updated', Number);
     setTableName('tournaments');
+});
+
+var Tournament_v = describe('Tournament_v', function () {
+    property('tournament_name', String);
+    property('start_date', Number);
+    property('end_date', Number);
+    property('usatt_star_rating_code', String, {default: '0' });
+    property('facility_id', Number);
+    property('date_created', Number);
+    property('date_updated', Number);
+    property('facility_code', String);
+    property('facility_name', String);
+    property('facility_city', String);
+    property('facility_state_or_province', String);
+    setTableName('tournaments_v');
 });
 

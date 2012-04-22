@@ -9,6 +9,8 @@
 load('application');
 
 before(loadTournament, {only: ['show', 'edit', 'update', 'destroy']});
+before(use('loadFacilityList'), {only: ['new', 'edit']}); // Added this call to create the facility_list object.
+before(use('loadUSATTStarList'), {only: ['new', 'edit']}); // Added this call to create the usatt_star_list object.
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Tournament';
@@ -37,7 +39,7 @@ action(function create() {
 
 action(function index() {
     this.title = 'Tournaments index';
-    Tournament.all(function (err, tournaments) {
+    Tournament_v.all(function (err, tournaments) {
         render({
             tournaments: tournaments
         });

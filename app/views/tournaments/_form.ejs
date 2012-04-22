@@ -23,13 +23,15 @@
 <div class="control-group">
    <%- form.label("usatt_star_rating", false, {class: "control-label"}) %>
    <div class="controls">
-       <%- form.input("usatt_star_rating") %>
+<!--     <%- form.input("usatt_star_rating") %> -->
+     <%- xxtd_createDropDown("Tournament_usatt_star_rating_code", "Tournament[usatt_star_rating_code]", usatt_star_list, tournament.usatt_star_rating_code, "meaning", "lookup_code") %>
    </div>
 </div>
 <div class="control-group">
    <%- form.label("facility_id", false, {class: "control-label"}) %>
    <div class="controls">
-       <%- form.input("facility_id") %>
+<!--       <%- form.input("facility_id") %>-->
+     <%- xxtd_createDropDown("Tournament_facility_id", "Tournament[facility_id]", facility_list, tournament.facility_id, "facility_name", "id") %>
    </div>
 </div>
 

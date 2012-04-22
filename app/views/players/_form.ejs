@@ -54,7 +54,7 @@
 <div class="control-group">
    <%- form.label("state_or_province", false, {class: "control-label"}) %>
    <div class="controls">
-     <%- xxtd_createDropDown("state_or_province", player, state_or_province_list, player.state_or_province) %>
+     <%- xxtd_createDropDown("Player_state_or_province", "Player[state_or_province]", state_or_province_list, player.state_or_province, "meaning", "lookup_code") %>
    </div>
 </div>
 </div> <!-- end of span6 column 2 -->
@@ -73,7 +73,7 @@
 <div class="control-group">
   <%- form.label("country_code", false, {class: "control-label"}) %>
   <div class="controls">
-     <%- xxtd_createDropDown("country_code", player, country_list, player.country_code) %>
+     <%- xxtd_createDropDown("Player_country_code", "Player[country_code]", country_list, player.country_code, "meaning", "lookup_code") %>
   </div>
 </div>
 </div> <!-- end of span6 column 2 -->
@@ -134,7 +134,7 @@
    <%- form.label("sex_code", false, {class: "control-label"}) %>
    <div class="controls">
        <!-- <%- form.input("sex_code") %> -->
-     <%- xxtd_createDropDown("sex_code", player, sex_list, player.sex_code) %>
+     <%- xxtd_createDropDown("Player_sex_code", "Player[sex_code]", sex_list, player.sex_code, "meaning", "lookup_code") %>
    </div>
 </div>
 </div> <!-- end of span6 column 2 -->

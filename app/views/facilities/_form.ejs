@@ -39,7 +39,7 @@
    <%- form.label("state_or_province", false, {class: "control-label"}) %>
    <div class="controls">
 <!--       <%- form.input("state_or_province") %> -->
-     <%- xxtd_createDropDown("state_or_province", facility, state_or_province_list, facility.state_or_province) %>
+     <%- xxtd_createDropDown("Facility_state_or_province", "Facility[state_or_province]", state_or_province_list, facility.state_or_province, "meaning", "lookup_code") %>
 
    </div>
 </div>
@@ -53,7 +53,7 @@
 <div class="control-group">
   <%- form.label("country_code", false, {class: "control-label"}) %>
   <div class="controls">
-     <%- xxtd_createDropDown("country_code", facility, country_list, facility.country_code) %>
+     <%- xxtd_createDropDown("Facility_country_code", "Facility[country_code]", country_list, facility.country_code, "meaning", "lookup_code") %>
   </div>
 </div>
 

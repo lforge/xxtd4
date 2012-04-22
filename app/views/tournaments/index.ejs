@@ -18,6 +18,9 @@
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Star Rating</th>
+                        <th>Facility Name</th>
+                        <th>City</th>
+                        <th>State</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -27,7 +30,10 @@
                             <td><strong><%- link_to(tournament.tournament_name, path_to.tournament(tournament)) %></strong></td>
                             <td><%= xxtd_UtcToHumanDate(tournament.start_date) %></td>
                             <td><%= xxtd_UtcToHumanDate(tournament.end_date) %></td>
-                            <td><%= tournament.usatt_star_rating %></td>
+                            <td><%= tournament.usatt_star_rating_code %></td>
+                            <td><%= (tournament.facility_name == null) ? 'Not Selected' : tournament.facility_name %></td>
+                            <td><%= (tournament.facility_city == null) ? 'N/A' : tournament.facility_city %></td>
+                            <td><%= (tournament.facility_state_or_province == null) ? 'N/A' : tournament.facility_state_or_province %></td>
                             <td>
                                 <%- link_to('<i class="icon-edit"></i> Edit', path_to.edit_tournament(tournament), {class: 'btn btn-mini'}) %>
                                 <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.tournament(tournament), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>        

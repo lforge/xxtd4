@@ -3,7 +3,7 @@
 </div>
 
 <% form_for(tournament, {action: path_to.tournaments(), method: 'POST', id: "tournament_form", class: 'form-horizontal'}, function (form) { %>
-    <%- partial('tournaments/form.ejs', {locals: {form: form, tournament: tournament}}) %>
+    <%- partial('tournaments/form.ejs', {locals: {form: form, tournament: tournament, facility_list: facility_list, usatt_star_list: usatt_star_list}}) %>
     <div class="form-actions">
         <%- form.submit('<i class="icon-ok icon-white"></i> Create tournament', {class: 'btn btn-primary'}) %> or
         <%- link_to('Cancel', path_to.tournaments(), {class: 'btn'}) %>

@@ -12,8 +12,8 @@
 load('application');
 
 before(loadFacility, {only: ['show', 'edit', 'update', 'destroy']});
-before(use('loadStateList')); // Added this call so that every http request will have access to the state_or_province_list object.
-before(use('loadCountryList')); // Added this call to create the country_list object.
+before(use('loadStateList'), {only: ['new', 'edit']}); // Added this call so that every http request will have access to the state_or_province_list object.
+before(use('loadCountryList'), {only: ['new', 'edit']}); // Added this call to create the country_list object.
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Facility';

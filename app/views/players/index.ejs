@@ -22,7 +22,6 @@
                         <th>State</th>
                         <th>USATT</br>Rating</th>
                         <th>Home Club</th>
-                        <th>Sex</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -37,7 +36,6 @@
                             <td><%= player.state_or_province %></td>
                             <td><%= player.usatt_rating %></td>
                             <td><%= player.home_club %></td>
-                            <td><%= player.sex_code_m %></td>
                             <td>
                                 <%- link_to('<i class="icon-edit"></i> Edit', path_to.edit_player(player), {class: 'btn btn-mini'}) %>
                                 <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.player(player), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>        
