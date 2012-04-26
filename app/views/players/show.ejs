@@ -21,8 +21,8 @@
         <tr><th>USATT Expiration Date</th><td><%= xxtd_UtcToHumanDate(player.usatt_expiredate) %></td></tr>
         <tr><th>Home Club</th><td><%= player.home_club %></td></tr>
         <tr><th>Email</th><td><%= player.email %></td></tr>
-        <tr><th>Home Phone</th><td><%= player.home_phone %></td></tr>
-        <tr><th>Mobile Phone</th><td><%= player.mobile_phone %></td></tr>
+        <tr><th>Mobile Phone</th><td><%= xxtd_USPhoneNum(player.mobile_phone) %></td></tr>
+        <tr><th>Home Phone</th><td><%= xxtd_USPhoneNum(player.home_phone) %></td></tr>
     </tbody>
 </table>
 

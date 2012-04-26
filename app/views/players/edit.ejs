@@ -3,7 +3,7 @@
 <% form_for(player, {action: path_to.player(player), method: 'PUT', id: "player_form", class: 'form-horizontal'}, function (form) { %>
     <%- partial('players/form.ejs', {locals: {form: form, player: player, state_or_province_list: state_or_province_list, sex_list: sex_list, country_list: country_list}}) %>
     <div class="form-actions">
-        <%- form.submit('<i class="icon-ok icon-white"></i> Update Player', {class: 'btn btn-primary'}) %> or
+        <%- form.submit('<i class="icon-ok icon-white"></i> Update Player', {class: 'btn btn-primary', id: 'player_btn'}) %> or
         <%- link_to('Cancel', path_to.players(), {class: 'btn'}) %>
     </div>
 <% });%>

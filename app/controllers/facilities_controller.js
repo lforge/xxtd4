@@ -8,12 +8,13 @@
 // Jude Lam        04/06/2012 - Added before(loadStateList) call and its function.
 // Jude Lam        04/14/2012 - Added before(loadCountryList) call and its function.
 // Jude Lam        04/21/2012 - Updated the index action to use Facility_v model instead.
+// Jude Lam        04/22/2012 - Updated the destroy method to check for existing records in tournaments table.
 
 load('application');
 
 before(loadFacility, {only: ['show', 'edit', 'update', 'destroy']});
-before(use('loadStateList'), {only: ['new', 'edit']}); // Added this call so that every http request will have access to the state_or_province_list object.
-before(use('loadCountryList'), {only: ['new', 'edit']}); // Added this call to create the country_list object.
+before(use('loadStateList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call so that every http request will have access to the state_or_province_list object.
+before(use('loadCountryList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the country_list object.
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Facility';
@@ -43,6 +44,7 @@ action(function create() {
 
 action(function index() {
     this.title = v_form_title_p;  // Updated to use new controller level variable.
+
     Facility_v.all(function (err, facilities) {
         render({
             facilities: facilities
@@ -78,14 +80,10 @@ action(function update() {
 });
 
 action(function destroy() {
-    this.facility.destroy(function (error) {
-        if (error) {
-            flash('error', 'Can not delete facility');
-        } else {
-            flash('info', 'Facility is successfully removed');
-        }
-        send("'" + path_to.facilities + "'");
-    });
+
+    // Check to see if there is any record in the Tournament table.  If there is any,
+    // disallow the delete.
+    Tournament.count({facility_id:this.facility.id}, chkFacilityThenDelete.bind(this)); // End of Tournament.all call.
 });
 
 function loadFacility() {
@@ -97,4 +95,32 @@ function loadFacility() {
             next();
         }
     }.bind(this));
+}
+
+// Define the function chkFacilityThenDelete to ensure that the Facility is not allowed to be
+// deleted if there is at least one tournament that is linked to it.
+function chkFacilityThenDelete(err, results) {
+  if (err) {
+    // error occurred during count.
+    flash('error', 'Database Error: Cannot count the facility id: ' + this.facility.id + ' in tournaments table.');
+    redirect(path_to.facilities);
+  } else {
+    // no error, then check to see if the count is greater than zero.  If it is, disallow the delete.  Otherwise, proceed with the delete.
+    if (results > 0 ) {
+      // disallow the delete because record exists in tournaments table.
+      flash('error', 'There is at least one record in Tournament setup that is linked to the facility ' +
+                     this.facility.facility_name + '. You cannot delete this record until you remove the link in Tournament setup.');
+	    send("'" + path_to.facilities + "'");
+    } else {
+      // perform the delete.
+		  this.facility.destroy(function (error) {
+		     if (error) {
+		       flash('error', 'Can not delete facility');
+			   } else {
+			     flash('info', 'Facility is successfully removed');
+			   }
+			   send("'" + path_to.facilities + "'");
+			}); // end of destroy method.
+    }
+  } // end of if(err) check.
 }

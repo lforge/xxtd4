@@ -57,19 +57,5 @@
   </div>
 </div>
 
-<!-- Adding upper case event handler and adding the handler event. -->
-<script type="text/javascript" name = "convertUpperCase">
-  function xxtd_CaseHandler(event) {
-    var eSrc = eventUtility.getTarget(event);
-    var type = event.type;
-    if (eSrc.id.toUpperCase() === 'FACILITY_FACILITY_CODE') {
-      if (type === "keyup") {
-        eSrc.value = eSrc.value.toUpperCase();
-      }
-    }
-  }
-  eventUtility.addEvent(document, "keyup", xxtd_CaseHandler );
-</script>
-
 <%- form.input("date_created", {type: "hidden"}) %>
 <%- form.input("date_updated", {type: "hidden"}) %>

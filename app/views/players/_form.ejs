@@ -82,7 +82,8 @@
 <div class = "row">
 <div class = "span6">
 <div class="control-group">
-   <%- form.label("usatt_number", false, {class: "control-label"}) %>
+<!--   <%- form.label("usatt_number", false, {class: "control-label"}) %>-->
+   <label for="Player_usatt_number" class="control-label">USATT Number</label>
    <div class="controls">
        <%- form.input("usatt_number") %>
    </div>
@@ -102,7 +103,8 @@
 <div class = "row">
 <div class = "span6">
 <div class="control-group">
-   <%- form.label("usatt_rating", false, {class: "control-label"}) %>
+<!--   <%- form.label("usatt_rating", false, {class: "control-label"}) %>-->
+   <label for="Player_usatt_rating" class="control-label">USATT Rating</label>
    <div class="controls">
        <%- form.input("usatt_rating") %>
    </div>
@@ -171,7 +173,7 @@
 <div class="control-group">
    <%- form.label("mobile_phone", false, {class: "control-label"}) %>
    <div class="controls">
-       <%- form.input("mobile_phone") %>
+       <input type="text" id="mobile_phone_formatted" value="<%= xxtd_USPhoneNum(player.mobile_phone) %>">
    </div>
 </div>
 </div> <!-- end of span6 column 1 -->
@@ -179,7 +181,7 @@
 <div class="control-group">
    <%- form.label("home_phone", false, {class: "control-label"}) %>
    <div class="controls">
-       <%- form.input("home_phone") %>
+       <input type="text" id="home_phone_formatted" value="<%= xxtd_USPhoneNum(player.home_phone) %>">
    </div>
 </div>
 </div> <!-- end of span6 column 2 -->
@@ -191,3 +193,6 @@
 <%- form.input("birth_date", {type: "hidden"}) %>
 <%- form.input("date_created", {type: "hidden"}) %>
 <%- form.input("date_updated", {type: "hidden"}) %>
+<%- form.input("mobile_phone", {type: "hidden"}) %>
+<%- form.input("home_phone", {type: "hidden"}) %>
+

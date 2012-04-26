@@ -7,13 +7,16 @@
 // Jude Lam        04/13/2012 - Initial creation.
 // Jude Lam        04/14/2012 - Added before(loadCountryList) call and its function.
 // Jude Lam        04/21/2012 - Updated the index action to use Player_v model instead.
+// Jude Lam        04/22/2012 - Updated the index() to sort the list by first_name, last_name.
+// Jude Lam        04/26/2012 - Updated the index() to use railway-pagination npm module.  Also, customize 
+//                              the module to accept order option.
 
 load('application');
 
 before(loadPlayer, {only: ['show', 'edit', 'update', 'destroy']});
-before(use('loadStateList'), {only: ['new', 'edit']}); // Added this call so that every http request will have access to the state_or_province_list object.
-before(use('loadSexList'), {only: ['new', 'edit']}); // Added this call so that every http request will have access to the sex_list object.
-before(use('loadCountryList'), {only: ['new', 'edit']}); // Added this call to create the country_list object.
+before(use('loadStateList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call so that every http request will have access to the state_or_province_list object.
+before(use('loadSexList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call so that every http request will have access to the sex_list object.
+before(use('loadCountryList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the country_list object.
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Player';
@@ -43,10 +46,14 @@ action(function create() {
 
 action(function index() {
     this.title = v_form_title_p;  // Updated to use new controller level variable.
-    Player_v.all(function (err, players) {
+    var page = req.param('page') || 1;
+
+    Player_v.paginate({order: 'first_name, last_name', limit: 10, page: page}, function (err, players) {
+       if(!err) {
         render({
             players: players
         });
+       }
     });
 });
 

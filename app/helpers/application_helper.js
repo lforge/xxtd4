@@ -10,6 +10,7 @@
 // Jude Lam        04/21/2012 - Updated xxtd_createDropDown to add fid, meaning_name, code_name parameter to 
 //                              make it more generalized instead of just for lookup_codes process.
 //                            - Removed the check for current_code != null check for the selected = selected option.
+// Jude Lam        04/22/2012 - Added the xxtd_USPhoneNum function to convert raw phone number such as 1112223333 to (111) 222-3333.
 
 module.exports = {
   // xxtd_createDropDown will generate a HTML drop down select list HTML tag. If the value in the current_code matches
@@ -75,4 +76,10 @@ module.exports = {
       return ''+mm+'/'+dd+'/'+yyyy;
     }
   } // end of xxtd_utc_to_human_date
+  //xxtd_USPhoneNum will convert a raw number such as 1112223333 to (111) 222-3333.
+ ,xxtd_USPhoneNum: function(raw_phone_num) {
+    if (raw_phone_num != null) {
+      return '(' + raw_phone_num.substr(0, 3) + ') ' + raw_phone_num.substr(3, 3) + '-' + raw_phone_num.substr(6);
+    }
+  } // end of xxtd_USPhoneNum
 };
