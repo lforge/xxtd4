@@ -1,0 +1,61 @@
+<%- errorMessagesFor(event) %>
+<div class="control-group">
+   <%- form.label("tournament_id", false, {class: "control-label"}) %>
+   <div class="controls">
+<!---       <%- form.input("tournament_id") %>-->
+     <%- xxtd_createDropDown("Event_tournament_id", "Event[tournament_id]", tournament_list, event.tournament_id, "tournament_name", "id") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("event_name", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("event_name") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("event_type_code", false, {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("event_type_code") %>-->
+     <%- xxtd_createDropDown("Event_event_type_code", "Event[event_type_code]", event_type_list, event.event_type_code, "meaning", "lookup_code") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("event_type_overunder_flag", false, {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("event_type_overunder_flag") %>-->
+     <%- xxtd_createDropDown("Event_event_type_overunder_flag", "Event[event_type_overunder_flag]", event_overunder_list, event.event_type_overunder_flag, "meaning", "lookup_code") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("event_type_threshold", false, {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("event_type_threshold") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("event_type_cutoff_date", false, {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("event_type_cutoff_date") %>-->
+     <input type="text" id="event_type_cutoff_date_pick" value="<%= xxtd_UtcToHumanDate(event.event_type_cutoff_date) %>">
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("event_start_time", false, {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("event_start_time") %>-->
+     <input type="text" id="event_start_time_pick" value="<%= xxtd_UtcToHumanDate(event.event_start_time, 'Y') %>">
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("event_check_in_time", false, {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("event_check_in_time") %>-->
+     <input type="text" id="event_check_in_time_pick" value="<%= xxtd_UtcToHumanDate(event.event_check_in_time, 'Y') %>">
+   </div>
+</div>
+
+<%- form.input("event_check_in_time", {type: "hidden"}) %>
+<%- form.input("event_start_time", {type: "hidden"}) %>
+<%- form.input("event_type_cutoff_date", {type: "hidden"}) %>
+<%- form.input("date_created", {type: "hidden"}) %>
+<%- form.input("date_updated", {type: "hidden"}) %>

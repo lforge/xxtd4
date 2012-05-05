@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><%= title %></title>
+        <%- stylesheet_link_tag('bootstrap', 'style', 'bootstrap-responsive', 'bootstrap.min', 'ui-lightness/jquery-ui-1.8.18.custom') %>
+        <%- javascript_include_tag('jquery-1.7.1.min', 'jquery-ui-1.8.18.custom.min', 'bootstrap', 'rails', 'application', 'bootstrap-dropdown', 'bootstrap-modal', 'jquery.maskedinput-1.3.min', 'jquery-ui-timepicker-addon') %>
+        <%- csrf_meta_tag() %>
+    </head>
+    <body>
+
+      <%- partial('menu.ejs') %>
+            
+        <div class="container">
+            <% var flash = request.flash('info').pop(); if (flash) { %>
+                <div class="alert alert-info">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <%- flash %>
+                </div>
+            <% } %>
+            
+            <% flash = request.flash('error').pop(); if (flash) { %>
+                <div class="alert alert-error">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <%- flash %>
+                </div>
+            <% }; %>
+            
+            <%- body %>
+<script>
+    // Activate the bootsrap dropdown JQuery plug-in.
+    $(document).ready(function () {
+        $(".dropdown-toggle").dropdown();
+    });
+
+    // Activate the JQuery date picker.
+    $(function() {
+		  $("#event_type_cutoff_date_pick").datepicker({
+        altField: "#Event_event_type_cutoff_date"
+       ,altFormat: "@"
+      });
+    });
+
+    // Activate the Trent Richardson Date/Time picker.
+    $('#event_start_time_pick').datetimepicker();
+    $('#event_check_in_time_pick').datetimepicker();
+
+    // Utility function that will parse a string of time in the format of 'mm/dd/yyyy hh:mi' to return
+    // Unix epoch string.
+    function parse_datetime(str_datetime) {
+      var v_year = str_datetime.substr(6, 4) - 0;
+      var v_month = str_datetime.substr(0, 2) - 0;
+      var v_date = str_datetime.substr(3, 2) - 0;
+      var v_hour = str_datetime.substr(11, 2) - 0;
+      var v_min = str_datetime.substr(14, 2) - 0;
+      var v_dtt = new Date(v_year, v_month - 1, v_date, v_hour, v_min, 0, 0);
+      return v_dtt.getTime();
+    }
+
+    // JQuery function to assign the value from the event_start_time_pick to Event_event_start_time fields.
+    $('#event_form').bind('submit', function(event) {
+
+        // Convert it to Unix epoch format.
+        $('#Event_event_start_time').val(parse_datetime($('#event_start_time_pick').val()));
+        $('#Event_event_check_in_time').val(parse_datetime($('#event_check_in_time_pick').val()));
+    });
+
+</script>
+            <hr />
+            <footer>
+                <p><%= xxtd_DisplayFooter() %></p>
+            </footer>
+        </div>
+    </body>
+</html>

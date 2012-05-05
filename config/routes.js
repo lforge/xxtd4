@@ -1,4 +1,5 @@
 exports.routes = function (map) {
+    map.resources('events');
     map.resources('tournaments');
     map.resources('players');
     map.resources('versions', {only: ['index']});  // only response to the index "/versions" request.

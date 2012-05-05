@@ -1,0 +1,9 @@
+<div class="page-header"><h1>Edit Event</h1></div>
+
+<% form_for(event, {action: path_to.event(event), method: 'PUT', id: "event_form", class: 'form-horizontal'}, function (form) { %>
+    <%- partial('events/form.ejs', {locals: {form: form, event: event, tournament_list: tournament_list, event_type_list: event_type_list, event_overunder_list: event_overunder_list}}) %>
+    <div class="form-actions">
+        <%- form.submit('<i class="icon-ok icon-white"></i> Update Event', {class: 'btn btn-primary'}) %> or
+        <%- link_to('Cancel', path_to.events(), {class: 'btn'}) %>
+    </div>
+<% });%>

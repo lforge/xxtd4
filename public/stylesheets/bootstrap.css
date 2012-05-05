@@ -3495,7 +3495,7 @@ a.thumbnail:hover {
   visibility: hidden;
 }
 
-/** Added the following as a hack to support nested drop down **/
+/** Jude Lam - 04/10/2012 - Added the following as a hack to support nested drop down **/
 .nav li.dropdown ul.dropdown-menu li:hover ul {
 display:block; 
 position:absolute; 
@@ -3511,3 +3511,11 @@ position: relative;
 top: auto;
 margin-top: -30px;
 }
+
+/** Jude Lam - 05/04/2012 - Added the following to support Trent Richardson Timepicker **/
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }

@@ -11,6 +11,8 @@
 //                              make it more generalized instead of just for lookup_codes process.
 //                            - Removed the check for current_code != null check for the selected = selected option.
 // Jude Lam        04/22/2012 - Added the xxtd_USPhoneNum function to convert raw phone number such as 1112223333 to (111) 222-3333.
+// Jude Lam        05/04/2012 - Updated xxtd_UtcToHumanDate function to add show_time parameter and the related logic.
+//
 
 module.exports = {
   // xxtd_createDropDown will generate a HTML drop down select list HTML tag. If the value in the current_code matches
@@ -62,7 +64,7 @@ module.exports = {
 
   //xxtd_UtcToHumanDate will convert raw_date in Unix UTC format to human readable format.
   // for now, this is hardcoded with mm/dd/yyyy format.
- ,xxtd_UtcToHumanDate: function(raw_date) {
+ ,xxtd_UtcToHumanDate: function(raw_date, show_time) {
     if ((raw_date == null) || (raw_date == '')) {
       return '';
     } else {
@@ -71,9 +73,17 @@ module.exports = {
       var yyyy = dummy_date.getFullYear();
       var mm = dummy_date.getMonth()+1;
       var dd = dummy_date.getDate();
-      if (mm < 10) { mm = '0'+ mm; } // add leading zero for month if the month is a single digit.
+      var hh = dummy_date.getHours();
+      var mi = dummy_date.getMinutes();
+      if (mm < 10) { mm = '0' + mm; } // add leading zero for month if the month is a single digit.
       if (dd < 10) { dd = '0' + dd; } // add leading zero for day if the day is a single digit.
-      return ''+mm+'/'+dd+'/'+yyyy;
+      if (hh < 10) { hh = '0' + hh; } // add leading zero for hour if the hour is a single digit.
+      if (mi < 10) { mi = '0' + mi; } // add leading zero for minute if the hour is a single digit.
+      if (show_time == null) {
+        return ''+mm+'/'+dd+'/'+yyyy;
+      } else {
+        return ''+mm+'/'+dd+'/'+yyyy+' '+hh+':'+mi;
+      }
     }
   } // end of xxtd_utc_to_human_date
   //xxtd_USPhoneNum will convert a raw number such as 1112223333 to (111) 222-3333.

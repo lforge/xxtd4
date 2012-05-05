@@ -1,0 +1,24 @@
+<div class="page-header">
+    <h1>Details of Event</h1>
+</div>
+
+
+<table class="table table-bordered">
+    <tbody>
+        <tr><th>tournament_id</th><td><%= event.tournament_id %></td></tr>
+        <tr><th>event_name</th><td><%= event.event_name %></td></tr>
+        <tr><th>event_type_code</th><td><%= event.event_type_code %></td></tr>
+        <tr><th>event_type_cutoff_date</th><td><%= event.event_type_cutoff_date %></td></tr>
+        <tr><th>event_type_overunder_flag</th><td><%= event.event_type_overunder_flag %></td></tr>
+        <tr><th>event_type_threshold</th><td><%= event.event_type_threshold %></td></tr>
+        <tr><th>event_start_time</th><td><%= event.event_start_time %></td></tr>
+        <tr><th>event_check_in_time</th><td><%= event.event_check_in_time %></td></tr>
+    </tbody>
+</table>
+
+<div class="well">
+    <%- link_to('<i class="icon-edit icon-white"></i> Edit', path_to.edit_event(event), {class: 'btn btn-primary'}) %>
+    <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.event(event), {class: 'btn btn-danger', method: 'delete', remote: true, jsonp: '(function (u) { location.href = u; })'}) %>
+    or
+    <%- link_to('Back to index', path_to.events()) %>
+</div>

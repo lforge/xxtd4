@@ -21,19 +21,18 @@
 
 */
 
-/*var Facility = describe('Facility', function () {
-    property('facility_code', String);
-    property('facility_name', String);
-    property('number_of_tables', String);
-    property('address1', String);
-    property('address2', String);
-    property('city', String);
-    property('state_or_province', String);
-    property('postal_code', String);
-    property('country_code', String);
-    property('date_created', String);
-    property('date_updated', String);
-});*/
+// File Name: app/db/schema.js
+// Purpose: Main Model/database table definition.
+//
+// Update History
+// Name            Date       Description
+// --------------- ---------- ------------------------------------------------------------------------------
+// Jude Lam        04/06/2012 - Initial creation with Facility model definition.
+// Jude Lam        04/07/2012 - Added Lookup model definition.
+// Jude Lam        04/13/2012 - Added Player model definition.
+// Jude Lam        04/20/2012 - Added the _v view model definition for Facility, Player, and Tournament.
+// Jude Lam        04/21/2012 - Added Tournament model definition.
+// Jude Lam        05/02/2012 - Added Event model definition.
 
 var Facility = describe('Facility', function () {
     property('facility_code', String);
@@ -153,4 +152,23 @@ var Tournament_v = describe('Tournament_v', function () {
     property('facility_state_or_province', String);
     setTableName('tournaments_v');
 });
+
+var Event = describe('Event', function () {
+    property('tournament_id', Number);
+    property('event_name', String);
+    property('event_type_code', String, {default: 'OTHER'});
+    property('event_type_cutoff_date', Number);
+    property('event_type_overunder_flag', String, {default: 'N'});
+    property('event_type_threshold', Number);
+    property('event_start_time', Number);
+    property('event_check_in_time', Number);
+    property('date_created', Number);
+    property('date_updated', Number);
+    setTableName('events');
+});
+
+// Define relationships between Tournaments and Events.
+Tournament.hasMany(Event, {as: 'events', foreignKey: 'tournament_id'});
+Event.belongsTo(Tournament, {as: 'tournament', foreignKey: 'tournament_id'});
+
 

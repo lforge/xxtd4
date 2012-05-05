@@ -1,0 +1,43 @@
+<div class="page-header">
+    <h1>List of event</h1>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <p><%- link_to('<i class="icon-plus icon-white"></i> New Event', path_to.new_event(), {class: 'btn btn-primary'}) %></>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <% if (events.length > 0) { %>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>TournamentId</th>
+                        <th>Event Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% events.forEach(function (event) { %>
+                        <tr>
+                            <td><strong><%- link_to('event #' + event.id, path_to.event(event)) %></strong></td>
+                            <td><%= event.tournament_id %></td>
+                            <td><%= event.event_name %></td>
+                            <td>
+                                <%- link_to('<i class="icon-edit"></i> Edit', path_to.edit_event(event), {class: 'btn btn-mini'}) %>
+                                <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.event(event), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>        
+                            </td>
+                        </tr>
+                    <% }); %>        
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="alert alert-block alert-info">
+                <strong>No events were found.</strong> 
+            </p>
+        <% } %>
+    </div>
+</div>

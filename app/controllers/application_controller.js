@@ -19,6 +19,9 @@ publish('loadSexList', loadSexList);
 publish('getLookupMeaning', getLookupMeaning);
 publish('loadFacilityList', loadFacilityList);
 publish('loadUSATTStarList', loadUSATTStarList);
+publish('loadAllTournamentList', loadAllTournamentList);
+publish('loadEventTypeList', loadEventTypeList);
+publish('loadEventOverUnderList', loadEventOverUnderList);
 
 
 // loadStateList() will setup the JSON object for list of state.  For now, this is only working for US states.
@@ -80,6 +83,34 @@ function loadFacilityList() {
 function loadUSATTStarList() {
 	Lookup.all({where: {'lookup_type':'USATT_STAR'}}, function(err, lookups){
 	 this.usatt_star_list = lookups;
+	 next(); // process the next tick.  If you don't put it here, it will stuck at this point.
+	}.bind(this));
+}
+
+// loadAllTournamentList() will retrieve all tournaments from the tournament table.
+function loadAllTournamentList() {
+  Tournament.all(function(err, results) {
+    this.tournament_list = results;
+    var empty_tournament = new Tournament();
+    empty_tournament.tournament_name = 'Not Selected';
+    empty_tournament.id = "";
+    this.tournament_list.unshift(empty_tournament); // add the new empty Not Selected list to the top of the array.
+    next(); // process the next tick.
+  }.bind(this));
+}
+
+// loadEventTypeList() will setup the JSON object for list of Event Types.
+function loadEventTypeList() {
+	Lookup.all({where: {'lookup_type':'EVENT_TYPE'}}, function(err, lookups){
+	 this.event_type_list = lookups;
+	 next(); // process the next tick.  If you don't put it here, it will stuck at this point.
+	}.bind(this));
+}
+
+// loadEventOverUnderList() will setup the JSON object for list of Event Over/Under flag.
+function loadEventOverUnderList() {
+	Lookup.all({where: {'lookup_type':'OVER_UNDER'}}, function(err, lookups){
+	 this.event_overunder_list = lookups;
 	 next(); // process the next tick.  If you don't put it here, it will stuck at this point.
 	}.bind(this));
 }
