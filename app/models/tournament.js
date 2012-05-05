@@ -20,12 +20,11 @@ Tournament.beforeCreate = createTimeStamp;
 function updateTimeStamp(done) {
   this.date_updated = (new Date()) - 0;
   done();
-};
+}
 
 function createTimeStamp(done) {
   this.date_created = (new Date()) - 0;
   this.date_updated = (new Date()) - 0;
   done();
-};
-
+}
 

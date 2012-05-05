@@ -33,6 +33,7 @@
 // Jude Lam        04/20/2012 - Added the _v view model definition for Facility, Player, and Tournament.
 // Jude Lam        04/21/2012 - Added Tournament model definition.
 // Jude Lam        05/02/2012 - Added Event model definition.
+// Jude Lam        05/05/2012 - Added current_flag column to Tournament and Tournament_v model.
 
 var Facility = describe('Facility', function () {
     property('facility_code', String);
@@ -133,6 +134,7 @@ var Tournament = describe('Tournament', function () {
     property('end_date', Number);
     property('usatt_star_rating_code', String, {default: '0' });
     property('facility_id', Number);
+    property('current_flag', String, {default: 'N'});
     property('date_created', Number);
     property('date_updated', Number);
     setTableName('tournaments');
@@ -144,6 +146,8 @@ var Tournament_v = describe('Tournament_v', function () {
     property('end_date', Number);
     property('usatt_star_rating_code', String, {default: '0' });
     property('facility_id', Number);
+    property('current_flag', String);
+    property('current_flag_m', String);
     property('date_created', Number);
     property('date_updated', Number);
     property('facility_code', String);

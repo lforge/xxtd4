@@ -37,7 +37,7 @@ action(function create() {
                 title: 'New ' + v_form_title_s  // Updated to use new controller level variable.
             });
         } else {
-            flash('info', v_form_title_s + ' is created');  // Updated to use new controller level variable.
+            flash('info', v_form_title_s + ' is created.');  // Updated to use new controller level variable.
             //redirect(path_to.players());
             redirect(path_to.players); // Updated to redirect to the main object index page rather than the show page.
         }
@@ -64,7 +64,7 @@ action(function show() {
     // Setup the anonymous callback function before calling Lookup.getLookupMeaning.
     var sexCodeMeaning = function(err, result){
       if(err) {
-        flash('error', 'Cannot retrieve sex code using ' + this.player.sex_code);
+        flash('error', 'Cannot retrieve sex code using ' + this.player.sex_code + '.');
         this.sex_code_meaning = 'Unknown';
       } else {
         this.sex_code_meaning = result[0].meaning;
@@ -98,11 +98,11 @@ action(function edit() {
 action(function update() {
     this.player.updateAttributes(body.Player, function (err) {
         if (!err) {
-            flash('info', v_form_title_s + ' is updated');
+            flash('info', v_form_title_s + ' is updated.');
             //redirect(path_to.player(this.player));
             redirect(path_to.players);
         } else {
-            flash('error', v_form_title_s + ' can not be updated');
+            flash('error', v_form_title_s + ' can not be updated.');
             this.title = 'Edit ' + v_form_title_s + ' details';  // Updated to use new controller level variable.
             render('edit');
         }
@@ -112,9 +112,9 @@ action(function update() {
 action(function destroy() {
     this.player.destroy(function (error) {
         if (error) {
-            flash('error', 'Can not delete player');
+            flash('error', 'Can not delete player.');
         } else {
-            flash('info', 'Player is successfully removed');
+            flash('info', 'Player is successfully removed.');
         }
         send("'" + path_to.players() + "'");
     });

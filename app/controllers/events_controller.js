@@ -32,7 +32,7 @@ action(function create() {
                 title: 'New ' + v_form_title_s  // Updated to use new controller level variable.
             });
         } else {
-            flash('info', v_form_title_s + ' is created');  // Updated to use new controller level variable.
+            flash('info', v_form_title_s + ' is created.');  // Updated to use new controller level variable.
             redirect(path_to.events());
         }
     });
@@ -60,10 +60,10 @@ action(function edit() {
 action(function update() {
     this.event.updateAttributes(body.Event, function (err) {
         if (!err) {
-            flash('info', v_form_title_s + ' is updated');
+            flash('info', v_form_title_s + ' is updated.');
             redirect(path_to.events);
         } else {
-            flash('error', v_form_title_s + ' can not be updated');
+            flash('error', v_form_title_s + ' can not be updated.');
             this.title = 'Edit ' + v_form_title_s + ' details';  // Updated to use new controller level variable.
             render('edit');
         }
@@ -73,9 +73,9 @@ action(function update() {
 action(function destroy() {
     this.event.destroy(function (error) {
         if (error) {
-            flash('error', 'Can not destroy event');
+            flash('error', 'Can not destroy event.');
         } else {
-            flash('info', 'Event is successfully removed');
+            flash('info', 'Event is successfully removed.');
         }
         send("'" + path_to.events() + "'");
     });

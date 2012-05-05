@@ -35,7 +35,7 @@ action(function create() {
                 title: 'New ' + v_form_title_s
             });
         } else {
-            flash('info', v_form_title_s + ' is created');
+            flash('info', v_form_title_s + ' is created.');
             //redirect(path_to.facilities());
             redirect(path_to.facilities); // Updated to redirect to the main object index page rather than the show page.
         }
@@ -68,11 +68,11 @@ action(function update() {
 
     this.facility.updateAttributes(body.Facility, function (err) {
         if (!err) {
-            flash('info', v_form_title_s + ' is updated');
+            flash('info', v_form_title_s + ' is updated.');
             //redirect(path_to.facility(this.facility));
             redirect(path_to.facilities);
         } else {
-            flash('error', v_form_title_s + ' can not be updated');
+            flash('error', v_form_title_s + ' can not be updated.');
             this.title = 'Edit ' + v_form_title_s + ' details';  // Updated to use new controller level variable.
             render('edit');
         }

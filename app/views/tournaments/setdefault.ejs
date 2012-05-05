@@ -1,11 +1,5 @@
 <div class="page-header">
-    <h1>List of Tournaments</h1>
-</div>
-
-<div class="row">
-    <div class="span12">
-        <p><%- link_to('<i class="icon-plus icon-white"></i> New Tournament', path_to.new_tournament(), {class: 'btn btn-primary'}) %></>
-    </div>
+    <h1>Set Current Default Tournament</h1>
 </div>
 
 <div class="row">
@@ -28,7 +22,7 @@
                 <tbody>
                     <% tournaments.forEach(function (tournament) { %>
                         <tr>
-                            <td><strong><%- link_to(tournament.tournament_name, path_to.tournament(tournament)) %></strong></td>
+                            <td><%= tournament.tournament_name %></td>
                             <td><%= xxtd_UtcToHumanDate(tournament.start_date) %></td>
                             <td><%= xxtd_UtcToHumanDate(tournament.end_date) %></td>
                             <td><%= tournament.usatt_star_rating_code %></td>
@@ -37,8 +31,7 @@
                             <td><%= (tournament.facility_state_or_province == null) ? 'N/A' : tournament.facility_state_or_province %></td>
                             <td><%= tournament.current_flag_m %></td>
                             <td>
-                                <%- link_to('<i class="icon-edit"></i> Edit', path_to.edit_tournament(tournament), {class: 'btn btn-mini'}) %>
-                                <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.tournament(tournament), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>        
+                                <%- (tournament.current_flag == 'N') ? link_to('<i class="icon-ok-circle"></i> Set As Current Default', 'tournaments/updateDefault/'+tournament.id, {class: 'btn btn-inverse'}) : null %>
                             </td>
                         </tr>
                     <% }); %>        
