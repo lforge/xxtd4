@@ -5,14 +5,14 @@
 
 <table class="table table-bordered">
     <tbody>
-        <tr><th>tournament_id</th><td><%= event.tournament_id %></td></tr>
-        <tr><th>event_name</th><td><%= event.event_name %></td></tr>
-        <tr><th>event_type_code</th><td><%= event.event_type_code %></td></tr>
-        <tr><th>event_type_cutoff_date</th><td><%= event.event_type_cutoff_date %></td></tr>
-        <tr><th>event_type_overunder_flag</th><td><%= event.event_type_overunder_flag %></td></tr>
-        <tr><th>event_type_threshold</th><td><%= event.event_type_threshold %></td></tr>
-        <tr><th>event_start_time</th><td><%= event.event_start_time %></td></tr>
-        <tr><th>event_check_in_time</th><td><%= event.event_check_in_time %></td></tr>
+        <tr><th>Tournament</th><td><%= event.tournament_name %></td></tr>
+        <tr><th>Event Start Time</th><td><%= xxtd_UtcToHumanDate(event.event_start_time, 'Y') %></td></tr>
+        <tr><th>Event Name</th><td><%= event.event_name %></td></tr>
+        <tr><th>Event Type</th><td><%= event.event_type_code_m %></td></tr>
+        <tr><th>Over/Under</th><td><%= event.event_type_overunder_flag_m %></td></tr>
+        <tr><th>Threshold</th><td><%= event.event_type_threshold %></td></tr>
+        <tr><th>Event Threshold Cutoff Date</th><td><%= xxtd_UtcToHumanDate(event.event_type_cutoff_date, 'Y') %></td></tr>
+        <tr><th>Event Check-In Time</th><td><%= xxtd_UtcToHumanDate(event.event_check_in_time, 'Y') %></td></tr>
     </tbody>
 </table>
 

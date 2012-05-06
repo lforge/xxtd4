@@ -14,18 +14,26 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>TournamentId</th>
+                        <th>Tournament Name</th>
+                        <th>Start Time</th>
                         <th>Event Name</th>
+                        <th>Event Type</th>
+                        <th>Over/Under</th>
+                        <th>Threshold</th>
+                        <th>Check-in Time</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% events.forEach(function (event) { %>
                         <tr>
-                            <td><strong><%- link_to('event #' + event.id, path_to.event(event)) %></strong></td>
-                            <td><%= event.tournament_id %></td>
-                            <td><%= event.event_name %></td>
+                            <td><%= event.tournament_name %></td>
+                            <td><%- xxtd_UtcToHumanDate(event.event_start_time, 'Y')%></td>
+                            <td><strong><%- link_to(event.event_name, path_to.event(event)) %></strong></td>
+                            <td><%= event.event_type_code_m %></td>
+                            <td><%= event.event_type_overunder_flag_m %></td>
+                            <td><%= event.event_type_threshold %></td>
+                            <td><%- xxtd_UtcToHumanDate(event.event_check_in_time, 'Y')%></td>
                             <td>
                                 <%- link_to('<i class="icon-edit"></i> Edit', path_to.edit_event(event), {class: 'btn btn-mini'}) %>
                                 <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.event(event), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>        

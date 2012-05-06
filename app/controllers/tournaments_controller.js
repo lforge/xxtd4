@@ -8,7 +8,9 @@
 // Jude Lam        05/05/2012 - Added loadTournament_v for show() action.
 //                            - Added default tournament function handling such as setDefault and updateDefault actions.
 //                            - Added setNewDefault function to set a new default tournament.
-//                            
+//                            - Added logic to disallow the deletion of Tournament record if there is at least 1 event
+//                              that is linked to it.
+//                            - Added the routine chkTournamentThenDelete to check and delete for Tournament record.
 
 load('application');
 
@@ -75,6 +77,7 @@ action(function update() {
 });
 
 action(function destroy() {
+/*
     this.tournament.destroy(function (error) {
         if (error) {
             flash('error', 'Can not delete tournament.');
@@ -83,6 +86,9 @@ action(function destroy() {
         }
         send("'" + path_to.tournaments() + "'");
     });
+*/
+  // Count to see if there is any Event linked to the Tournament.  If there is, do not allow the deletion.
+  Event.count({tournament_id:this.tournament.id}, chkTournamentThenDelete.bind(this));
 });
 
 action('setDefault', function () {
@@ -161,3 +167,31 @@ function setNewDefault() {
 	  }
 	});  // end of Tournament.find
 } // end of setNewDefault()
+
+// Define the function chkTournamentThenDelete to ensure that the Tournament is not allowed to be
+// deleted if there is at least one event that is linked to it.
+function chkTournamentThenDelete(err, results) {
+  if (err) {
+    // error occurred during count.
+    flash('error', 'Database Error: Cannot count the tournament id: ' + this.tournament.id + ' in the events database table.');
+    redirect(path_to.tournaments);
+  } else {
+    // no error, then check to see if the count is greater than zero.  If it is, disallow the delete.  Otherwise, proceed with the delete.
+    if (results > 0 ) {
+      // disallow the delete because record exists in tournaments table.
+      flash('error', 'There is at least one event that is linked to the current Tournament: ' +
+                     this.tournament.tournament_name + '. You cannot delete this record until you remove the link in Event setup.');
+	    send("'" + path_to.tournaments + "'");
+    } else {
+      // perform the delete.
+		  this.tournament.destroy(function (error) {
+		     if (error) {
+		       flash('error', 'Can not delete facility.');
+			   } else {
+			     flash('info', 'Tournament is successfully removed.');
+			   }
+			   send("'" + path_to.tournaments + "'");
+			}); // end of destroy method.
+    }
+  } // end of if(err) check.
+}

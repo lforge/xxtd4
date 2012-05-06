@@ -63,9 +63,6 @@ action(function edit() {
 });
 
 action(function update() {
-
-//console.log('JKL body.Facility: ' + JSON.stringify(body.Facility));
-
     this.facility.updateAttributes(body.Facility, function (err) {
         if (!err) {
             flash('info', v_form_title_s + ' is updated.');
@@ -83,7 +80,7 @@ action(function destroy() {
 
     // Check to see if there is any record in the Tournament table.  If there is any,
     // disallow the delete.
-    Tournament.count({facility_id:this.facility.id}, chkFacilityThenDelete.bind(this)); // End of Tournament.all call.
+    Tournament.count({facility_id:this.facility.id}, chkFacilityThenDelete.bind(this)); // End of Tournament.count call.
 });
 
 function loadFacility() {
@@ -102,7 +99,7 @@ function loadFacility() {
 function chkFacilityThenDelete(err, results) {
   if (err) {
     // error occurred during count.
-    flash('error', 'Database Error: Cannot count the facility id: ' + this.facility.id + ' in tournaments table.');
+    flash('error', 'Database Error: Cannot count the facility id: ' + this.facility.id + ' in the tournaments database table.');
     redirect(path_to.facilities);
   } else {
     // no error, then check to see if the count is greater than zero.  If it is, disallow the delete.  Otherwise, proceed with the delete.
@@ -115,9 +112,9 @@ function chkFacilityThenDelete(err, results) {
       // perform the delete.
 		  this.facility.destroy(function (error) {
 		     if (error) {
-		       flash('error', 'Can not delete facility');
+		       flash('error', 'Can not delete facility.');
 			   } else {
-			     flash('info', 'Facility is successfully removed');
+			     flash('info', 'Facility is successfully removed.');
 			   }
 			   send("'" + path_to.facilities + "'");
 			}); // end of destroy method.

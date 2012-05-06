@@ -34,6 +34,7 @@
 // Jude Lam        04/21/2012 - Added Tournament model definition.
 // Jude Lam        05/02/2012 - Added Event model definition.
 // Jude Lam        05/05/2012 - Added current_flag column to Tournament and Tournament_v model.
+//                            - Added Event_v model definition.
 
 var Facility = describe('Facility', function () {
     property('facility_code', String);
@@ -169,6 +170,23 @@ var Event = describe('Event', function () {
     property('date_created', Number);
     property('date_updated', Number);
     setTableName('events');
+});
+
+var Event_v = describe('Event_v', function () {
+    property('tournament_id', Number);
+    property('event_name', String);
+    property('event_type_code', String, {default: 'OTHER'});
+    property('event_type_cutoff_date', Number);
+    property('event_type_overunder_flag', String, {default: 'N'});
+    property('event_type_threshold', Number);
+    property('event_start_time', Number);
+    property('event_check_in_time', Number);
+    property('date_created', Number);
+    property('date_updated', Number);
+    property('event_type_code_m', String);
+    property('event_type_overunder_flag_m', String);
+    property('tournament_name', String);
+    setTableName('events_v');
 });
 
 // Define relationships between Tournaments and Events.
