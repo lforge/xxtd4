@@ -11,6 +11,7 @@
 //                            - Added logic to disallow the deletion of Tournament record if there is at least 1 event
 //                              that is linked to it.
 //                            - Added the routine chkTournamentThenDelete to check and delete for Tournament record.
+// Jude Lam        05/06/2012 - Update index method to use railway-paginate extension.
 
 load('application');
 
@@ -46,11 +47,17 @@ action(function create() {
 
 action(function index() {
     this.title = 'Tournaments index';
-    Tournament_v.all(function (err, tournaments) {
+    var page = req.param('page') || 1;
+    Tournament_v.paginate({order: 'start_date desc, tournament_name', limit: 7, page: page}, function (err, tournaments) {
+       if(!err) {
         render({
             tournaments: tournaments
         });
+       }
     });
+
+
+
 });
 
 action(function show() {

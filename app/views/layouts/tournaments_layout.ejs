@@ -46,6 +46,15 @@
        ,altFormat: "@"
       });
     });
+    // Default start date to end date field if end date field is empty when 
+    // end date field is on focus.
+    $('#end_date_pick').focus(function(){
+      if(!$(this).val().length) {
+        // Default from end date.
+        $(this).val($('#start_date_pick').val());
+        $('#Tournament_end_date').val($('#Tournament_start_date').val());
+      }
+     });
 
 </script>
 

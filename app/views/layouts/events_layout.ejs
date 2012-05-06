@@ -56,6 +56,31 @@
       return v_dtt.getTime();
     }
 
+    // Utility function that will convert ePoch unix value back to date/time format 'mm/dd/yyyy hh:mi'
+    function parse_unixepoch(str_unixepoch) {
+      var v_dtt = new Date(str_unixepoch - 0);
+      var v_yr = v_dtt.getFullYear();
+      var v_mm = v_dtt.getMonth()+1;
+      var v_dt = v_dtt.getDate();
+      var v_hr = v_dtt.getHours();
+      var v_mi = v_dtt.getMinutes();
+      // add leading zeros
+      if (v_mm < 10) { v_mm = '0'+v_mm;}
+      if (v_dt < 10) { v_dt = '0'+v_dt;}
+      if (v_hr < 10) { v_hr = '0'+v_hr;}
+      if (v_mi < 10) { v_mi = '0'+v_mi;}
+      return v_mm + '/' + v_dt + '/' + v_yr + ' ' + v_hr + ':' + v_mi;      
+    }
+
+    // Default start time to one hour prior to start time for check in time field 
+    // if the check-in time field is empty when check-in date field is on focus.
+    $('#event_check_in_time_pick').focus(function(){
+      if(!$(this).val().length) {
+        // Default from end date.
+        $(this).val(parse_unixepoch(parse_datetime($('#event_start_time_pick').val()) - 3600000));
+      }
+     });
+
     // JQuery function to assign the value from the event_start_time_pick to Event_event_start_time fields.
     $('#event_form').bind('submit', function(event) {
 

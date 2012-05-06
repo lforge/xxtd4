@@ -9,6 +9,7 @@
 //                            - Added logic to enforce event_type_threshold data to be numeric by subtracting itself with zero.
 //                            - Added the loadEvent_v function.
 //                            - Added the default of Tournament Id with current Tournament.
+// Jude Lam        05/06/2012 - Updated index method to use railway-pagination.
 
 load('application');
 
@@ -63,11 +64,16 @@ action(function create() {
 
 action(function index() {
     this.title = v_form_title_p;  // Updated to use new controller level variable.
-    Event_v.all( { order: 'tournament_name, event_start_time'}, function (err, events) {
+    var page = req.param('page') || 1;
+
+    Event_v.paginate({order: 'tournament_name, event_start_time', limit: 7, page: page}, function (err, events) {
+       if(!err) {
         render({
             events: events
         });
+       }
     });
+
 });
 
 action(function show() {
