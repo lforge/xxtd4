@@ -1,0 +1,9 @@
+<div class="page-header"><h1>Edit Stage</h1></div>
+
+<% form_for(stage, {action: path_to.stage(stage), method: 'PUT', id: "stage_form", class: 'form-horizontal'}, function (form) { %>
+    <%- partial('stages/form.ejs', {locals: {form: form, stage: stage, stage_format_list: stage_format_list, draw_format_list: draw_format_list, seed_basis_list: seed_basis_list, stage_status_list: stage_status_list, yes_no_list: yes_no_list, current_event_list: current_event_list}}) %>
+    <div class="form-actions">
+        <%- form.submit('<i class="icon-ok icon-white"></i> Update stage', {class: 'btn btn-primary'}) %> or
+        <%- link_to('Cancel', path_to.stages(), {class: 'btn'}) %>
+    </div>
+<% });%>

@@ -1,0 +1,58 @@
+<div class="page-header">
+    <h1>List of Stages</h1>
+</div>
+
+<div class="row">
+    <div class="span6">
+        <p><%- link_to('<i class="icon-plus icon-white"></i> New stage', path_to.new_stage(), {class: 'btn btn-primary'}) %></>
+    </div>
+    <div class="span6">
+        <%- paginate(stages) %>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <% if (stages.length > 0) { %>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Event Name</th>
+                        <th>Stage Name</th>
+                        <th>Stage Sequence</th>
+                        <th>Stage Format</th>
+                        <th>Group per Stage</th>
+                        <th>Player per Group</th>
+                        <th>Final Stage?</th>
+                        <th>Stage Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% stages.forEach(function (stage) { %>
+                        <tr>
+                            <td><strong><%- link_to(stage.id, path_to.stage(stage)) %></strong></td>
+                            <td><%= stage.event_name %></td>
+                            <td><%= stage.stage_name %></td>
+                            <td><%= stage.stage_sequence %></td>
+                            <td><%= stage.stage_format_code_m %></td>
+                            <td><%= stage.grp_per_stage %></td>
+                            <td><%= stage.player_per_grp %></td>
+                            <td><%= stage.final_stage_flag_m %></td>
+                            <td><%= stage.stage_status_code_m %></td>
+                            <td>
+                                <%- link_to('<i class="icon-edit"></i> Edit', path_to.edit_stage(stage), {class: 'btn btn-mini'}) %>
+                                <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.stage(stage), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>        
+                            </td>
+                        </tr>
+                    <% }); %>        
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="alert alert-block alert-info">
+                <strong>No stages were found.</strong> 
+            </p>
+        <% } %>
+    </div>
+</div>

@@ -52,7 +52,7 @@
 </div> <!-- end of span6 column 1 -->
 <div class = "span6">
 <div class="control-group">
-   <%- form.label("state_or_province", false, {class: "control-label"}) %>
+   <%- form.label("state_or_province", "State", {class: "control-label"}) %>
    <div class="controls">
      <%- xxtd_createDropDown("Player_state_or_province", "Player[state_or_province]", state_or_province_list, player.state_or_province, "meaning", "lookup_code") %>
    </div>
@@ -63,7 +63,7 @@
 <div class = "row">
 <div class = "span6">
 <div class="control-group">
-   <%- form.label("postal_code", false, {class: "control-label"}) %>
+   <%- form.label("postal_code", "Postal Code", {class: "control-label"}) %>
    <div class="controls">
        <%- form.input("postal_code") %>
    </div>
@@ -71,7 +71,7 @@
 </div> <!-- end of span6 column 1 -->
 <div class = "span6">
 <div class="control-group">
-  <%- form.label("country_code", false, {class: "control-label"}) %>
+  <%- form.label("country_code", "Country", {class: "control-label"}) %>
   <div class="controls">
      <%- xxtd_createDropDown("Player_country_code", "Player[country_code]", country_list, player.country_code, "meaning", "lookup_code") %>
   </div>
@@ -133,7 +133,7 @@
 <div class = "span6">
 
 <div class="control-group">
-   <%- form.label("sex_code", false, {class: "control-label"}) %>
+   <%- form.label("sex_code", "Sex", {class: "control-label"}) %>
    <div class="controls">
        <!-- <%- form.input("sex_code") %> -->
      <%- xxtd_createDropDown("Player_sex_code", "Player[sex_code]", sex_list, player.sex_code, "meaning", "lookup_code") %>
@@ -145,7 +145,7 @@
 <div class = "row">
 <div class = "span6">
 <div class="control-group">
-   <%- form.label("home_club", false, {class: "control-label"}) %>
+   <%- form.label("home_club", "Home Club", {class: "control-label"}) %>
    <div class="controls">
        <%- form.input("home_club") %>
    </div>
@@ -171,7 +171,7 @@
 <div class = "row">
 <div class = "span6">
 <div class="control-group">
-   <%- form.label("mobile_phone", false, {class: "control-label"}) %>
+   <%- form.label("mobile_phone", "Mobile Phone", {class: "control-label"}) %>
    <div class="controls">
        <input type="text" id="mobile_phone_formatted" value="<%= xxtd_USPhoneNum(player.mobile_phone) %>">
    </div>
@@ -179,7 +179,7 @@
 </div> <!-- end of span6 column 1 -->
 <div class = "span6">
 <div class="control-group">
-   <%- form.label("home_phone", false, {class: "control-label"}) %>
+   <%- form.label("home_phone", "Home Phone", {class: "control-label"}) %>
    <div class="controls">
        <input type="text" id="home_phone_formatted" value="<%= xxtd_USPhoneNum(player.home_phone) %>">
    </div>

@@ -1,12 +1,12 @@
 <%- errorMessagesFor(tournament) %>
 <div class="control-group">
-   <%- form.label("tournament_name", false, {class: "control-label"}) %>
+   <%- form.label("tournament_name", "Tournament Name", {class: "control-label"}) %>
    <div class="controls">
        <%- form.input("tournament_name") %>
    </div>
 </div>
 <div class="control-group">
-   <%- form.label("start_date", false, {class: "control-label"}) %>
+   <%- form.label("start_date", "Start Date", {class: "control-label"}) %>
    <div class="controls">
 <!--       <%- form.input("start_date") %>-->
      <input type="text" id="start_date_pick" value="<%= xxtd_UtcToHumanDate(tournament.start_date) %>">
@@ -14,21 +14,21 @@
 </div>
 
 <div class="control-group">
-   <%- form.label("end_date", false, {class: "control-label"}) %>
+   <%- form.label("end_date", "End Date", {class: "control-label"}) %>
    <div class="controls">
 <!--       <%- form.input("end_date") %>-->
      <input type="text" id="end_date_pick" value="<%= xxtd_UtcToHumanDate(tournament.end_date) %>">
    </div>
 </div>
 <div class="control-group">
-   <%- form.label("usatt_star_rating", false, {class: "control-label"}) %>
+   <%- form.label("usatt_star_rating", "USATT Star Rating", {class: "control-label"}) %>
    <div class="controls">
 <!--     <%- form.input("usatt_star_rating") %> -->
      <%- xxtd_createDropDown("Tournament_usatt_star_rating_code", "Tournament[usatt_star_rating_code]", usatt_star_list, tournament.usatt_star_rating_code, "meaning", "lookup_code") %>
    </div>
 </div>
 <div class="control-group">
-   <%- form.label("facility_id", false, {class: "control-label"}) %>
+   <%- form.label("facility_id", "Facility", {class: "control-label"}) %>
    <div class="controls">
 <!--       <%- form.input("facility_id") %>-->
      <%- xxtd_createDropDown("Tournament_facility_id", "Tournament[facility_id]", facility_list, tournament.facility_id, "facility_name", "id") %>

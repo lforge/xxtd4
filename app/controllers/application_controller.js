@@ -8,6 +8,12 @@
 // Jude Lam        04/16/2012 - Moved loadxxx functions from <model>_controller.js to here.
 // Jude Lam        04/21/2012 - Added the loadFacilityList function.
 //                            - Added the loadUSATTStarList function.
+// Jude Lam        05/08/2012 - Added the loadStageStatusList function.
+// Jude Lam        05/13/2012 - Added the loadStageFormatList function.
+//                            - Added the loadDrawFormatList function.
+//                            - Added the loadSeedBasisList function.
+//                            - Added the loadYesNoList function.
+//                            - Added the loadCurrentEventsList function.
 
 before('protect from forgery', function () {
     protectFromForgery('b01ad3d4b1c2c4bc37460acab9b07e039959ffae');
@@ -22,7 +28,12 @@ publish('loadUSATTStarList', loadUSATTStarList);
 publish('loadAllTournamentList', loadAllTournamentList);
 publish('loadEventTypeList', loadEventTypeList);
 publish('loadEventOverUnderList', loadEventOverUnderList);
-
+publish('loadStageStatusList', loadStageStatusList);
+publish('loadStageFormatList', loadStageFormatList);
+publish('loadDrawFormatList', loadDrawFormatList);
+publish('loadSeedBasisList', loadSeedBasisList);
+publish('loadYesNoList', loadYesNoList);
+publish('loadCurrentEventsList', loadCurrentEventsList);
 
 // loadStateList() will setup the JSON object for list of state.  For now, this is only working for US states.
 function loadStateList() {
@@ -114,3 +125,62 @@ function loadEventOverUnderList() {
 	 next(); // process the next tick.  If you don't put it here, it will stuck at this point.
 	}.bind(this));
 }
+
+// loadStageStatusList() will setup the JSON object for list of Stage Status code.
+function loadStageStatusList() {
+	Lookup.all({where: {'lookup_type':'STAGE_STATUS'}}, function(err, lookups){
+	 this.stage_status_list = lookups;
+	 next(); // process the next tick.  If you don't put it here, it will stuck at this point.
+	}.bind(this));
+}
+
+// loadStageFormatList() will setup the JSON object for list of Stage Format code.
+function loadStageFormatList() {
+	Lookup.all({where: {'lookup_type':'STAGE_FORMAT'}}, function(err, lookups){
+	 this.stage_format_list = lookups;
+	 next(); // process the next tick.  If you don't put it here, it will stuck at this point.
+	}.bind(this));
+}
+
+// loadDrawFormatList() will setup the JSON object for list of Stage Format code.
+function loadDrawFormatList() {
+	Lookup.all({where: {'lookup_type':'DRAW_FORMAT'}}, function(err, lookups){
+	 this.draw_format_list = lookups;
+	 next(); // process the next tick.  If you don't put it here, it will stuck at this point.
+	}.bind(this));
+}
+
+// loadSeedBasisList() will setup the JSON object for list of Seeding Basis code.
+function loadSeedBasisList() {
+	Lookup.all({where: {'lookup_type':'SEEDING_BASIS'}}, function(err, lookups){
+	 this.seed_basis_list = lookups;
+	 next(); // process the next tick.  If you don't put it here, it will stuck at this point.
+	}.bind(this));
+}
+
+// loadYesNoList() will setup the JSON object for list of Yes/No code.
+function loadYesNoList() {
+	Lookup.all({where: {'lookup_type':'YES_NO'}}, function(err, lookups){
+	 this.yes_no_list = lookups;
+	 next(); // process the next tick.  If you don't put it here, it will stuck at this point.
+	}.bind(this));
+}
+
+// loadCurrentEventsList() will retrieve all events for the "Current Tournament" from the events_v view.
+function loadCurrentEventsList() {
+  Tournament.findOne({where: {'current_flag':'Y'}},function(err, results) {
+    if(err) return err; // stop continue processing if there is any error.
+    this.tournament = results;
+    // Use the tournament id to find all events.
+    Event_v.all({where: {'tournament_id':this.tournament.id}}, function(err, events) {
+      this.current_event_list = events;
+      var empty_event = new Event_v();
+      empty_event.event_name = 'Not Selected';
+      empty_event.id = "";
+      this.current_event_list.unshift(empty_event); // add the new empty Not Selected list to the top of the array.
+      next(); // process the next tick.
+    }.bind(this));
+  }.bind(this));
+}
+
+// Need a loadAllEventsList()

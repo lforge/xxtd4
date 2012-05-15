@@ -30,11 +30,14 @@
 // Jude Lam        04/06/2012 - Initial creation with Facility model definition.
 // Jude Lam        04/07/2012 - Added Lookup model definition.
 // Jude Lam        04/13/2012 - Added Player model definition.
-// Jude Lam        04/20/2012 - Added the _v view model definition for Facility, Player, and Tournament.
+// Jude Lam        04/20/2012 - Added the Facility_v view model definition for Facility, Player, and Tournament.
 // Jude Lam        04/21/2012 - Added Tournament model definition.
 // Jude Lam        05/02/2012 - Added Event model definition.
 // Jude Lam        05/05/2012 - Added current_flag column to Tournament and Tournament_v model.
 //                            - Added Event_v model definition.
+// Jude Lam        05/12/2012 - Added Stage model definition.
+// Jude Lam        05/13/2012 - Added number_of_tables field to Tournament_v model.
+// Jude Lam        05/14/2012 - Added Stage_v model.
 
 var Facility = describe('Facility', function () {
     property('facility_code', String);
@@ -155,12 +158,14 @@ var Tournament_v = describe('Tournament_v', function () {
     property('facility_name', String);
     property('facility_city', String);
     property('facility_state_or_province', String);
+    property('number_of_tables', Number);
     setTableName('tournaments_v');
 });
 
 var Event = describe('Event', function () {
     property('tournament_id', Number);
     property('event_name', String);
+    property('event_status_code', String, {default: 'N'});
     property('event_type_code', String, {default: 'OTHER'});
     property('event_type_cutoff_date', Number);
     property('event_type_overunder_flag', String, {default: 'N'});
@@ -175,6 +180,7 @@ var Event = describe('Event', function () {
 var Event_v = describe('Event_v', function () {
     property('tournament_id', Number);
     property('event_name', String);
+    property('event_status_code', String, {default: 'N'});
     property('event_type_code', String, {default: 'OTHER'});
     property('event_type_cutoff_date', Number);
     property('event_type_overunder_flag', String, {default: 'N'});
@@ -186,6 +192,7 @@ var Event_v = describe('Event_v', function () {
     property('event_type_code_m', String);
     property('event_type_overunder_flag_m', String);
     property('tournament_name', String);
+    property('event_status_code_m', String);
     setTableName('events_v');
 });
 
@@ -193,4 +200,55 @@ var Event_v = describe('Event_v', function () {
 Tournament.hasMany(Event, {as: 'events', foreignKey: 'tournament_id'});
 Event.belongsTo(Tournament, {as: 'tournament', foreignKey: 'tournament_id'});
 
+var Stage = describe('Stage', function () {
+    property('stage_name', String);
+    property('stage_sequence', Number);
+    property('event_id', Number);
+    property('stage_format_code', String, {default: 'RR'});
+    property('number_of_tbl_used', Number);
+    property('draw_format_code', String, {default: 'RANDOM'});
+    property('seeding_basis_code', String, {default: 'ER'});
+    property('top_x_bye_player', Number, {default: '0'});
+    property('grp_per_stage', Number);
+    property('player_per_grp', Number);
+    property('game_per_match', Number, {default: '5'});
+    property('final_stage_flag', String, {default: 'N'});
+    property('default_match_duration', Number, {default: '20'});
+    property('stage_status_code', String, {default: 'N'});
+    property('date_created', Number);
+    property('date_updated', Number);
+    setTableName('stages');
+});
+
+// Define relationships between Events and Stages.
+Event.hasMany(Stage, {as: 'stages', foreignKey: 'event_id'});
+Stage.belongsTo(Event, {as: 'event', foreignKey: 'event_id'});
+
+var Stage_v = describe('Stage_v', function () {
+    property('stage_name', String);
+    property('stage_sequence', Number);
+    property('event_id', Number);
+    property('stage_format_code', String, {default: 'RR'});
+    property('number_of_tbl_used', Number);
+    property('draw_format_code', String, {default: 'RANDOM'});
+    property('seeding_basis_code', String, {default: 'ER'});
+    property('top_x_bye_player', Number, {default: '0'});
+    property('grp_per_stage', Number);
+    property('player_per_grp', Number);
+    property('game_per_match', Number, {default: '5'});
+    property('final_stage_flag', String, {default: 'N'});
+    property('default_match_duration', Number, {default: '20'});
+    property('stage_status_code', String, {default: 'N'});
+    property('date_created', Number);
+    property('date_updated', Number);
+    property('tournament_name', String);
+    property('event_name', String);
+    property('event_start_time', Number);
+    property('stage_format_code_m', String);
+    property('draw_format_code_m', String);
+    property('seeding_basis_code_m', String);
+    property('final_stage_flag_m', String);
+    property('stage_status_code_m', String);
+    setTableName('stages_v');
+});
 

@@ -7,6 +7,7 @@
 // Jude Lam        05/05/2012 - Added map.get('setDefault'...) route for setting up current default tournament.
 
 exports.routes = function (map) {
+    map.resources('stages');
     map.resources('events');
     map.resources('tournaments');
     map.resources('players');

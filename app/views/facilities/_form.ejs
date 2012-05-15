@@ -1,18 +1,18 @@
 <%- errorMessagesFor(facility) %>
 <div class="control-group">
-   <%- form.label("facility_code", false, {class: "control-label"}) %>
+   <%- form.label("facility_code", "Facility Code", {class: "control-label"}) %>
    <div class="controls">
        <%- form.input("facility_code") %>
    </div>
 </div>
 <div class="control-group">
-   <%- form.label("facility_name", false, {class: "control-label"}) %>
+   <%- form.label("facility_name", "Facility Name", {class: "control-label"}) %>
    <div class="controls">
        <%- form.input("facility_name") %>
    </div>
 </div>
 <div class="control-group">
-   <%- form.label("number_of_tables", false, {class: "control-label"}) %>
+   <%- form.label("number_of_tables", "No. of Tables", {class: "control-label"}) %>
    <div class="controls">
        <%- form.input("number_of_tables") %>
    </div>
@@ -36,7 +36,7 @@
    </div>
 </div>
 <div class="control-group">
-   <%- form.label("state_or_province", false, {class: "control-label"}) %>
+   <%- form.label("state_or_province", "State", {class: "control-label"}) %>
    <div class="controls">
 <!--       <%- form.input("state_or_province") %> -->
      <%- xxtd_createDropDown("Facility_state_or_province", "Facility[state_or_province]", state_or_province_list, facility.state_or_province, "meaning", "lookup_code") %>
@@ -44,14 +44,14 @@
    </div>
 </div>
 <div class="control-group">
-   <%- form.label("postal_code", false, {class: "control-label"}) %>
+   <%- form.label("postal_code", "Postal Code", {class: "control-label"}) %>
    <div class="controls">
        <%- form.input("postal_code") %>
    </div>
 </div>
 
 <div class="control-group">
-  <%- form.label("country_code", false, {class: "control-label"}) %>
+  <%- form.label("country_code", "Country", {class: "control-label"}) %>
   <div class="controls">
      <%- xxtd_createDropDown("Facility_country_code", "Facility[country_code]", country_list, facility.country_code, "meaning", "lookup_code") %>
   </div>

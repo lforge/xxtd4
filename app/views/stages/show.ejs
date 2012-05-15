@@ -1,0 +1,31 @@
+<div class="page-header">
+    <h1>Details of Stage</h1>
+</div>
+
+
+<table class="table table-bordered">
+    <tbody>
+        <tr><th>Id</th><td><%= stage.id %></td></tr>
+        <tr><th>Event Name</th><td><%= stage.event_name %></td></tr>
+        <tr><th>Stage Name</th><td><%= stage.stage_name %></td></tr>
+        <tr><th>Stage Sequence</th><td><%= stage.stage_sequence %></td></tr>
+        <tr><th>Stage Format</th><td><%= stage.stage_format_code_m %></td></tr>
+        <tr><th>No. of Table Used</th><td><%= stage.number_of_tbl_used %></td></tr>
+        <tr><th>Draw Format</th><td><%= stage.draw_format_code_m %></td></tr>
+        <tr><th>Seeding Basis</th><td><%= stage.seeding_basis_code_m %></td></tr>
+        <tr><th>No. of Bye Player</th><td><%= stage.top_x_bye_player %></td></tr>
+        <tr><th>No. of Groups per Stage</th><td><%= stage.grp_per_stage %></td></tr>
+        <tr><th>No. of Players per Group</th><td><%= stage.player_per_grp %></td></tr>
+        <tr><th>Games per Match</th><td><%= stage.game_per_match %></td></tr>
+        <tr><th>Is this the Event Final Stage?</th><td><%= stage.final_stage_flag_m %></td></tr>
+        <tr><th>Default Match Duration (in Min.)</th><td><%= stage.default_match_duration %></td></tr>
+        <tr><th>Stage Status</th><td><%= stage.stage_status_code_m %></td></tr>
+    </tbody>
+</table>
+
+<div class="well">
+    <%- link_to('<i class="icon-edit icon-white"></i> Edit', path_to.edit_stage(stage), {class: 'btn btn-primary'}) %>
+    <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.stage(stage), {class: 'btn btn-danger', method: 'delete', remote: true, jsonp: '(function (u) { location.href = u; })'}) %>
+    or
+    <%- link_to('Back to index', path_to.stages()) %>
+</div>

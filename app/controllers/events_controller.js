@@ -10,14 +10,17 @@
 //                            - Added the loadEvent_v function.
 //                            - Added the default of Tournament Id with current Tournament.
 // Jude Lam        05/06/2012 - Updated index method to use railway-pagination.
+// Jude Lam        05/08/2012 - Added the call to loadStageStatusList in the before flow.
+// Jude Lam        05/14/2012 - Added the 
 
 load('application');
 
 before(loadEvent, {only: ['edit', 'update', 'destroy']});
 before(loadEvent_v, {only: ['show']});
 before(use('loadAllTournamentList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the tournament_list object.
-before(use('loadEventTypeList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the tournament_list object.
-before(use('loadEventOverUnderList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the tournament_list object.
+before(use('loadEventTypeList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the event_type_list object.
+before(use('loadEventOverUnderList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the event_overunder_list object.
+before(use('loadStageStatusList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the stage_status_list object.
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Event';
@@ -104,7 +107,7 @@ action(function update() {
 });
 
 action(function destroy() {
-    this.event.destroy(function (error) {
+/*    this.event.destroy(function (error) {
         if (error) {
             flash('error', 'Can not destroy event.');
         } else {
@@ -112,6 +115,9 @@ action(function destroy() {
         }
         send("'" + path_to.events() + "'");
     });
+*/
+  // Count to see if there is any Stage linked to the Event.  If there is, do not allow the deletion.
+  Stage.count({event_id:this.event.id}, chkStageThenDelete.bind(this));
 });
 
 function loadEvent() {
@@ -135,4 +141,32 @@ function loadEvent_v() {
             next();
         }
     }.bind(this));
+}
+
+// Define the function chkStageThenDelete to ensure that the Event is not allowed to be
+// deleted if there is at least one stage that is linked to it.
+function chkStageThenDelete(err, results) {
+  if (err) {
+    // error occurred during count.
+    flash('error', 'Database Error: Cannot count the records in the stages database table using event id: ' + this.event.id + '.');
+    redirect(path_to.tournaments);
+  } else {
+    // no error, then check to see if the count is greater than zero.  If it is, disallow the delete.  Otherwise, proceed with the delete.
+    if (results > 0 ) {
+      // disallow the delete because record exists in tournaments table.
+      flash('error', 'There is at least one stage that is linked to the current Event: ' +
+                     this.event.event_name + '. You cannot delete this record until you remove the link in Stage setup.');
+	    send("'" + path_to.events + "'");
+    } else {
+      // perform the delete.
+		  this.event.destroy(function (error) {
+		     if (error) {
+		       flash('error', 'Can not delete event.');
+			   } else {
+			     flash('info', 'Event is successfully removed.');
+			   }
+			   send("'" + path_to.events + "'");
+			}); // end of destroy method.
+    }
+  } // end of if(err) check.
 }

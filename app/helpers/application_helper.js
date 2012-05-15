@@ -59,7 +59,7 @@ module.exports = {
 
   //xxtd_DisplayFooter will simply display a hardcoded footer text in html format.
  ,xxtd_DisplayFooter: function() {
-    return 'Tournament Director &copy; LForge, LLC 2012';
+    return 'Tournament Director &copy; Jude Lam 2012';
   } // end of xxtd_display_footer.
 
   //xxtd_UtcToHumanDate will convert raw_date in Unix UTC format to human readable format.
