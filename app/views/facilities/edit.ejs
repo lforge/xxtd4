@@ -1,4 +1,13 @@
-<div class="page-header"><h1>Edit Facility</h1></div>
+<div class="page-header">
+  <div class="row">
+    <div class="span4">
+      <h1>Edit Facility</h1>
+    </div>
+    <div class="span8 pagination-right">
+      <h3>Current Default Tournament: <%= currTournamentName %></h3>
+    </div>
+  </div>
+</div>
 
 <% form_for(facility, {action: path_to.facility(facility), method: 'PUT', id: "facility_form", class: 'form-horizontal'}, function (form) { %>
     <%- partial('facilities/form.ejs', {locals: {form: form, facility: facility, state_or_province_list: state_or_province_list, country_list: country_list}}) %>

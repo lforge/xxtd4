@@ -1,4 +1,13 @@
-<div class="page-header"><h1>Edit Player</h1></div>
+<div class="page-header">
+  <div class="row">
+    <div class="span4">
+      <h1>Edit Player</h1>
+    </div>
+    <div class="span8 pagination-right">
+      <h3>Current Default Tournament: <%= currTournamentName %></h3>
+    </div>
+  </div>
+</div>
 
 <% form_for(player, {action: path_to.player(player), method: 'PUT', id: "player_form", class: 'form-horizontal'}, function (form) { %>
     <%- partial('players/form.ejs', {locals: {form: form, player: player, state_or_province_list: state_or_province_list, sex_list: sex_list, country_list: country_list}}) %>

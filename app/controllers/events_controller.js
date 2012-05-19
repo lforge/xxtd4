@@ -11,7 +11,7 @@
 //                            - Added the default of Tournament Id with current Tournament.
 // Jude Lam        05/06/2012 - Updated index method to use railway-pagination.
 // Jude Lam        05/08/2012 - Added the call to loadStageStatusList in the before flow.
-// Jude Lam        05/14/2012 - Added the 
+// Jude Lam        05/16/2012 - Added the use of loadCurrentTournament in before flow.
 
 load('application');
 
@@ -21,6 +21,7 @@ before(use('loadAllTournamentList'), {only: ['new', 'edit', 'update', 'create']}
 before(use('loadEventTypeList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the event_type_list object.
 before(use('loadEventOverUnderList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the event_overunder_list object.
 before(use('loadStageStatusList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the stage_status_list object.
+before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index','show', 'setDefault']});
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Event';

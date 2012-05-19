@@ -10,6 +10,7 @@
 // Jude Lam        04/22/2012 - Updated the index() to sort the list by first_name, last_name.
 // Jude Lam        04/26/2012 - Updated the index() to use railway-pagination npm module.  Also, customize 
 //                              the module to accept order option.
+// Jude Lam        05/16/2012 - Added the use of loadCurrentTournament in before flow.
 
 load('application');
 
@@ -17,6 +18,7 @@ before(loadPlayer, {only: ['show', 'edit', 'update', 'destroy']});
 before(use('loadStateList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call so that every http request will have access to the state_or_province_list object.
 before(use('loadSexList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call so that every http request will have access to the sex_list object.
 before(use('loadCountryList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the country_list object.
+before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index','show', 'setDefault']});
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Player';

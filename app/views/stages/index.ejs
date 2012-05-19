@@ -1,5 +1,12 @@
 <div class="page-header">
-    <h1>List of Stages</h1>
+  <div class="row">
+    <div class="span4">
+      <h1>List of Stages</h1>
+    </div>
+    <div class="span8 pagination-right">
+      <h3>Current Default Tournament: <%= currTournamentName %></h3>
+    </div>
+  </div>
 </div>
 
 <div class="row">
@@ -20,6 +27,7 @@
                         <th>ID</th>
                         <th>Event Name</th>
                         <th>Stage Name</th>
+                        <th>Division</th>
                         <th>Stage Sequence</th>
                         <th>Stage Format</th>
                         <th>Group per Stage</th>
@@ -35,6 +43,7 @@
                             <td><strong><%- link_to(stage.id, path_to.stage(stage)) %></strong></td>
                             <td><%= stage.event_name %></td>
                             <td><%= stage.stage_name %></td>
+                            <td><%= stage.division_code_m %></td>
                             <td><%= stage.stage_sequence %></td>
                             <td><%= stage.stage_format_code_m %></td>
                             <td><%= stage.grp_per_stage %></td>

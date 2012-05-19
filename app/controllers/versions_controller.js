@@ -9,8 +9,6 @@
 
 load('application');
 
-//before(loadFacility, {only: ['show', 'edit', 'update', 'destroy']});
-//before(loadStateList);
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Version';

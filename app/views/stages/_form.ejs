@@ -30,6 +30,19 @@
 	</div>
 	</div> <!-- end of span6 column 1 -->
 	<div class="span6">
+		<div class="control-group">
+		   <%- form.label("division_code", "Division", {class: "control-label"}) %>
+		   <div class="controls">
+<!--		       <%- form.input("division_code") %>-->
+     <%- xxtd_createDropDown("Stage_division_code", "Stage[division_code]", division_list, stage.division_code, "meaning", "lookup_code") %>
+		   </div>
+		</div>
+	</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row2" -->
+
+<div class = "row">
+
+	<div class="span6">
 	<div class="control-group">
 	   <%- form.label("stage_format_code", "Stage Format", {class: "control-label"}) %>
 	   <div class="controls">
@@ -37,10 +50,7 @@
      <%- xxtd_createDropDown("Stage_stage_format_code", "Stage[stage_format_code]", stage_format_list, stage.stage_format_code, "meaning", "lookup_code") %>
 	   </div>
 	</div>
-	</div> <!-- end of span6 column 2 -->
-</div> <!-- end of class = "row2" -->
-
-<div class = "row">
+	</div> <!-- end of span6 column 1 -->
 
 	<div class="span6">
 		<div class="control-group">
@@ -49,8 +59,10 @@
 		       <%- form.input("number_of_tbl_used") %>
 		   </div>
 		</div>
-	</div> <!-- end of span6 column 1 -->
+	</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row3" -->
 
+<div class = "row">
 	<div class="span6">
 		<div class="control-group">
 		   <%- form.label("draw_format_code", "Draw Format", {class: "control-label"}) %>
@@ -59,10 +71,7 @@
      <%- xxtd_createDropDown("Stage_drarw_format_code", "Stage[draw_format_code]", draw_format_list, stage.draw_format_code, "meaning", "lookup_code") %>
 		   </div>
 		</div>
-	</div> <!-- end of span6 column 2 -->
-</div> <!-- end of class = "row3" -->
-
-<div class = "row">
+	</div> <!-- end of span6 column 1 -->
 	<div class="span6">
 		<div class="control-group">
 		   <%- form.label("seeding_basis_code", "Seeding Basis", {class: "control-label"}) %>
@@ -71,7 +80,10 @@
      <%- xxtd_createDropDown("Stage_seeding_basis_code", "Stage[seeding_basis_code]", seed_basis_list, stage.seeding_basis_code, "meaning", "lookup_code") %>
 		   </div>
 		</div>
-	</div> <!-- end of span6 column 1 -->
+	</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row4" -->
+
+<div class = "row">
 	<div class="span6">
 		<div class="control-group">
 		   <%- form.label("top_x_bye_player", "Top X Bye Player", {class: "control-label"}) %>
@@ -79,23 +91,12 @@
 		       <%- form.input("top_x_bye_player") %>
 		   </div>
 		</div>
-	</div> <!-- end of span6 column 2 -->
-</div> <!-- end of class = "row4" -->
-
-<div class = "row">
+	</div> <!-- end of span6 column 1 -->
 	<div class="span6">
 		<div class="control-group">
 		   <%- form.label("grp_per_stage", "No. of Group per Stage", {class: "control-label"}) %>
 		   <div class="controls">
 		       <%- form.input("grp_per_stage") %>
-		   </div>
-		</div>
-	</div> <!-- end of span6 column 1 -->
-	<div class="span6">
-		<div class="control-group">
-		   <%- form.label("player_per_grp", "No. of Player per Group", {class: "control-label"}) %>
-		   <div class="controls">
-		       <%- form.input("player_per_grp") %>
 		   </div>
 		</div>
 	</div> <!-- end of span6 column 2 -->
@@ -104,18 +105,17 @@
 <div class = "row">
 	<div class="span6">
 		<div class="control-group">
-		   <%- form.label("game_per_match", "No. of Games per Match", {class: "control-label"}) %>
+		   <%- form.label("player_per_grp", "No. of Player per Group", {class: "control-label"}) %>
 		   <div class="controls">
-		       <%- form.input("game_per_match") %>
+		       <%- form.input("player_per_grp") %>
 		   </div>
 		</div>
 	</div> <!-- end of span6 column 1 -->
 	<div class="span6">
 		<div class="control-group">
-		   <%- form.label("final_stage_flag", "Final Stage for the Event", {class: "control-label"}) %>
+		   <%- form.label("game_per_match", "No. of Games per Match", {class: "control-label"}) %>
 		   <div class="controls">
-<!--		       <%- form.input("final_stage_flag") %>-->
-     <%- xxtd_createDropDown("Stage_final_stage_flag", "Stage[final_stage_flag]", yes_no_list, stage.final_stage_flag, "meaning", "lookup_code") %>
+		       <%- form.input("game_per_match") %>
 		   </div>
 		</div>
 	</div> <!-- end of span6 column 2 -->
@@ -125,13 +125,25 @@
 <div class = "row">
 	<div class="span6">
 		<div class="control-group">
+		   <%- form.label("final_stage_flag", "Final Stage for the Event", {class: "control-label"}) %>
+		   <div class="controls">
+<!--		       <%- form.input("final_stage_flag") %>-->
+     <%- xxtd_createDropDown("Stage_final_stage_flag", "Stage[final_stage_flag]", yes_no_list, stage.final_stage_flag, "meaning", "lookup_code") %>
+		   </div>
+		</div>
+	</div> <!-- end of span6 column 1 -->
+	<div class="span6">
+		<div class="control-group">
 		   <%- form.label("default_match_duration", "Default Match Duration (in Min.)", {class: "control-label"}) %>
 		   <div class="controls">
 		       <%- form.input("default_match_duration") %>
 		   </div>
 		</div>
-	</div> <!-- end of span6 column 1 -->
-	<div class="span6">
+	</div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row7" -->
+
+<div class = "row">
+  <div class="span6">
 		<div class="control-group">
 		   <%- form.label("stage_status_code", "Stage Status", {class: "control-label"}) %>
 		   <div class="controls">
@@ -139,8 +151,10 @@
      <%- xxtd_createDropDown("Stage_stage_status_code", "Stage[stage_status_code]", stage_status_list, stage.stage_status_code, "meaning", "lookup_code") %>
 		   </div>
 		</div>
-	</div> <!-- end of span6 column 2 -->
-</div> <!-- end of class = "row7" -->
+  </div> <!-- end of span6 column 1 -->
+  <div class="span6">
+  </div> <!-- end of span6 column 2 -->
+</div> <!-- end of class = "row8" -->
 
 <%- form.input("date_created", {type: "hidden"}) %>
 <%- form.input("date_updated", {type: "hidden"}) %>

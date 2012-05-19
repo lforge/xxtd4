@@ -9,12 +9,14 @@
 // Jude Lam        04/14/2012 - Added before(loadCountryList) call and its function.
 // Jude Lam        04/21/2012 - Updated the index action to use Facility_v model instead.
 // Jude Lam        04/22/2012 - Updated the destroy method to check for existing records in tournaments table.
+// Jude Lam        05/16/2012 - Added the use of loadCurrentTournament in before flow.
 
 load('application');
 
 before(loadFacility, {only: ['show', 'edit', 'update', 'destroy']});
 before(use('loadStateList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call so that every http request will have access to the state_or_province_list object.
 before(use('loadCountryList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the country_list object.
+before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index','show', 'setDefault']});
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Facility';

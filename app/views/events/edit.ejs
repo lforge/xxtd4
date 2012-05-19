@@ -1,4 +1,13 @@
-<div class="page-header"><h1>Edit Event</h1></div>
+<div class="page-header">
+  <div class="row">
+    <div class="span4">
+      <h1>Edit Event</h1>
+    </div>
+    <div class="span8 pagination-right">
+      <h3>Current Default Tournament: <%= currTournamentName %></h3>
+    </div>
+  </div>
+</div>
 
 <% form_for(event, {action: path_to.event(event), method: 'PUT', id: "event_form", class: 'form-horizontal'}, function (form) { %>
     <%- partial('events/form.ejs', {locals: {form: form, event: event, tournament_list: tournament_list, event_type_list: event_type_list, event_overunder_list: event_overunder_list,stage_status_list: stage_status_list}}) %>

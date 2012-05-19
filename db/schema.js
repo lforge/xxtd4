@@ -38,6 +38,7 @@
 // Jude Lam        05/12/2012 - Added Stage model definition.
 // Jude Lam        05/13/2012 - Added number_of_tables field to Tournament_v model.
 // Jude Lam        05/14/2012 - Added Stage_v model.
+// Jude Lam        05/18/2012 - Update stages and stages_v model to add division_code and division_code_m fields.
 
 var Facility = describe('Facility', function () {
     property('facility_code', String);
@@ -205,6 +206,7 @@ var Stage = describe('Stage', function () {
     property('stage_sequence', Number);
     property('event_id', Number);
     property('stage_format_code', String, {default: 'RR'});
+    property('division_code', String, {default: '11-A'});
     property('number_of_tbl_used', Number);
     property('draw_format_code', String, {default: 'RANDOM'});
     property('seeding_basis_code', String, {default: 'ER'});
@@ -229,6 +231,7 @@ var Stage_v = describe('Stage_v', function () {
     property('stage_sequence', Number);
     property('event_id', Number);
     property('stage_format_code', String, {default: 'RR'});
+    property('division_code', String);
     property('number_of_tbl_used', Number);
     property('draw_format_code', String, {default: 'RANDOM'});
     property('seeding_basis_code', String, {default: 'ER'});
@@ -249,6 +252,7 @@ var Stage_v = describe('Stage_v', function () {
     property('seeding_basis_code_m', String);
     property('final_stage_flag_m', String);
     property('stage_status_code_m', String);
+    property('division_code_m', String);
     setTableName('stages_v');
 });
 

@@ -1,5 +1,12 @@
 <div class="page-header">
-    <h1>Details of Stage</h1>
+  <div class="row">
+    <div class="span4">
+      <h1>Detail of a Stage</h1>
+    </div>
+    <div class="span8 pagination-right">
+      <h3>Current Default Tournament: <%= currTournamentName %></h3>
+    </div>
+  </div>
 </div>
 
 
@@ -8,6 +15,7 @@
         <tr><th>Id</th><td><%= stage.id %></td></tr>
         <tr><th>Event Name</th><td><%= stage.event_name %></td></tr>
         <tr><th>Stage Name</th><td><%= stage.stage_name %></td></tr>
+        <tr><th>Division</th><td><%= stage.division_code_m %></td></tr>
         <tr><th>Stage Sequence</th><td><%= stage.stage_sequence %></td></tr>
         <tr><th>Stage Format</th><td><%= stage.stage_format_code_m %></td></tr>
         <tr><th>No. of Table Used</th><td><%= stage.number_of_tbl_used %></td></tr>

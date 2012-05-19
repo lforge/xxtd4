@@ -13,7 +13,8 @@
 //                            - Added the loadDrawFormatList function.
 //                            - Added the loadSeedBasisList function.
 //                            - Added the loadYesNoList function.
-//                            - Added the loadCurrentEventsList function.
+// Jude Lam        05/16/2012 - Added the loadCurrentTournament function.
+//                            - Moved the loadCurrentEventsList function back to stages_controller.js file.
 
 before('protect from forgery', function () {
     protectFromForgery('b01ad3d4b1c2c4bc37460acab9b07e039959ffae');
@@ -33,7 +34,7 @@ publish('loadStageFormatList', loadStageFormatList);
 publish('loadDrawFormatList', loadDrawFormatList);
 publish('loadSeedBasisList', loadSeedBasisList);
 publish('loadYesNoList', loadYesNoList);
-publish('loadCurrentEventsList', loadCurrentEventsList);
+publish('loadCurrentTournament', loadCurrentTournament);
 
 // loadStateList() will setup the JSON object for list of state.  For now, this is only working for US states.
 function loadStateList() {
@@ -166,21 +167,18 @@ function loadYesNoList() {
 	}.bind(this));
 }
 
-// loadCurrentEventsList() will retrieve all events for the "Current Tournament" from the events_v view.
-function loadCurrentEventsList() {
-  Tournament.findOne({where: {'current_flag':'Y'}},function(err, results) {
-    if(err) return err; // stop continue processing if there is any error.
-    this.tournament = results;
-    // Use the tournament id to find all events.
-    Event_v.all({where: {'tournament_id':this.tournament.id}}, function(err, events) {
-      this.current_event_list = events;
-      var empty_event = new Event_v();
-      empty_event.event_name = 'Not Selected';
-      empty_event.id = "";
-      this.current_event_list.unshift(empty_event); // add the new empty Not Selected list to the top of the array.
-      next(); // process the next tick.
-    }.bind(this));
+// loadCurrentTournament will retrieve the tournament that is set to be the current one.  If there is none,
+// it will then set the current value to None Selected.
+function loadCurrentTournament() {
+  Tournament_v.findOne({where: {'current_flag': 'Y'}}, function(err, result) {
+    if (result != null) {
+      this.currTournamentName = result.tournament_name;
+      this.currTournamentId = result.id;
+      this.currNumberOfTable = result.number_of_tables;
+    } else {
+      this.currTournamentName = 'Not Selected';
+      this.currTournamentId = -999;
+    }
+    next();
   }.bind(this));
 }
-
-// Need a loadAllEventsList()

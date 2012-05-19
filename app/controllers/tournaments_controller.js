@@ -13,6 +13,7 @@
 //                            - Added the routine chkTournamentThenDelete to check and delete for Tournament record.
 // Jude Lam        05/06/2012 - Update index method to use railway-paginate extension.
 // Jude Lam        05/14/2012 - Renamed the function from chkTournamentThenDelete to chkEventThenDelete.
+// Jude Lam        05/16/2012 - Added the use of loadCurrentTournament function in before flow.
 
 load('application');
 
@@ -20,6 +21,7 @@ before(loadTournament, {only: ['edit', 'update', 'destroy']});
 before(loadTournament_v, {only: ['show']});
 before(use('loadFacilityList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the facility_list object.
 before(use('loadUSATTStarList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the usatt_star_list object.
+before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index','show', 'setDefault']});
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Tournament';
