@@ -16,6 +16,8 @@
 // Jude Lam        05/16/2012 - Added the use of loadCurrentTournament in before flow.
 //                            - Moved the loadCurrentEventsList function from application_controller.js to stages_controller.js file.
 // Jude Lam        05/18/2012 - Added the use of loadDivisionList function in before flow.
+// Jude Lam        05/19/2012 - Updated the index method to pass where condition to the customized paginate routine if current tournament id
+//                              is available.
 
 load('application');
 
@@ -74,15 +76,11 @@ action(function create() {
 action(function index() {
     this.title = v_form_title_p;  // Updated to use new controller level variable.
     var page = req.param('page') || 1;
-
-    Stage_v.paginate({order: 'tournament_name, event_start_time desc, division_code, stage_sequence', limit: 7, page: page}, function (err, stages) {
-       if(!err) {
-        render({
-            stages: stages
-        });
-       }
+    Stage_v.paginate({where: {'tournament_id':this.currTournamentId}, order: 'tournament_name, event_start_time desc, division_code, stage_sequence', limit: 7, page: page}, function (err, stages) {
+      if(!err) {
+        render({stages: stages});
+      }
     });
-
 });
 
 action(function show() {

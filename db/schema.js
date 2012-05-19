@@ -253,6 +253,7 @@ var Stage_v = describe('Stage_v', function () {
     property('final_stage_flag_m', String);
     property('stage_status_code_m', String);
     property('division_code_m', String);
+    property('tournament_id', Number);
     setTableName('stages_v');
 });
 
