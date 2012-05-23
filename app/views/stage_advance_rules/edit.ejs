@@ -1,0 +1,18 @@
+<div class="page-header">
+  <div class="row">
+    <div class="span4">
+      <h1>Edit Stage Advance Rule</h1>
+    </div>
+    <div class="span8 pagination-right">
+      <h3>Current Default Tournament: <%= currTournamentName %></h3>
+    </div>
+  </div>
+</div>
+
+<% form_for(stage_advance_rule, {action: path_to.stage_advance_rule(stage_advance_rule), method: 'PUT', id: "stage_advance_rule_form", class: 'form-horizontal'}, function (form) { %>
+    <%- partial('stage_advance_rules/form.ejs', {locals: {form: form, stage_advance_rule: stage_advance_rule, yes_no_list: yes_no_list, current_event_list: current_event_list, winner_looser_list:winner_looser_list, top_x_finish_list: top_x_finish_list, from_stage_finish_list: from_stage_finish_list}}) %>
+    <div class="form-actions">
+        <%- form.submit('<i class="icon-ok icon-white"></i> Update Stage Advance Rule', {class: 'btn btn-primary'}) %> or
+        <%- link_to('Cancel', path_to.stage_advance_rules(), {class: 'btn'}) %>
+    </div>
+<% });%>

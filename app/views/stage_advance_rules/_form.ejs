@@ -1,0 +1,59 @@
+<%- errorMessagesFor(stage_advance_rule) %>
+<div class="control-group">
+   <%- form.label("event_id", "Event", {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("event_id") %> -->
+     <%- xxtd_createDropDown("Stage_advance_rule_event_id", "Stage_advance_rule[event_id]", current_event_list, stage_advance_rule.event_id, "event_name", "id") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("stage_advance_rule_name", "Stage Adv. Rule Name", {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("stage_advance_rule_name") %>
+   </div>
+</div>
+
+<div class="control-group">
+   <%- form.label("from_stage_id", "From Stage", {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("from_stage_id") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("top_x_finish", "Top X Finish", {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("top_x_finish") %>-->
+     <%- xxtd_createDropDown("Stage_advance_rule_top_x_finish_code", "Stage_advance_rule[top_x_finish_code]", top_x_finish_list, stage_advance_rule.top_x_finish_code, "meaning", "lookup_code") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("from_stage_finish", "From Stage Finish", {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("from_stage_finish") %> -->
+     <%- xxtd_createDropDown("Stage_advance_rule_from_stage_finish_code", "Stage_advance_rule[from_stage_finish_code]", from_stage_finish_list, stage_advance_rule.from_stage_finish_code, "meaning", "lookup_code") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("winner_looser_flag", "Winner or Looser Advance", {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("winner_looser_flag") %>-->
+     <%- xxtd_createDropDown("Stage_advance_rule_winner_looser_code", "Stage_advance_rule[winner_looser_code]", winner_looser_list, stage_advance_rule.winner_looser_code, "meaning", "lookup_code") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("to_stage_id", "To Stage", {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("to_stage_id") %>
+   </div>
+</div>
+
+<div class="control-group">
+   <%- form.label("unrated_plyr_advance_flag", "Unrated Player Advance", {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("unrated_plyr_advance_flag") %>-->
+     <%- xxtd_createDropDown("Stage_advance_rule_unrated_plyr_advance_flag", "Stage_advance_rule[unrated_plyr_advance_flag]", yes_no_list, stage_advance_rule.unrated_plyr_advance_flag, "meaning", "lookup_code") %>
+   </div>
+</div>
+
+<%- form.input("date_created", {type: "hidden"}) %>
+<%- form.input("date_updated", {type: "hidden"}) %>

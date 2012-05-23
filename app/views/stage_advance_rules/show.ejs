@@ -1,0 +1,32 @@
+<div class="page-header">
+  <div class="row">
+    <div class="span4">
+      <h1>Detail of a Stage Advance Rule</h1>
+    </div>
+    <div class="span8 pagination-right">
+      <h3>Current Default Tournament: <%= currTournamentName %></h3>
+    </div>
+  </div>
+</div>
+
+
+<table class="table table-bordered">
+    <tbody>
+        <tr><th>Event Name</th><td><%= stage_advance_rule.event_name %></td></tr>
+        <tr><th>Stage Advance Rule Name</th><td><%= stage_advance_rule.stage_advance_rule_name %></td></tr>
+        <tr><th>From Stage</th><td><%= stage_advance_rule.from_stage_name %></td></tr>
+        <tr><th>Top X Finish</th><td><%= stage_advance_rule.top_x_finish_code_m %></td></tr>
+        <tr><th>From Stage Finish</th><td><%= stage_advance_rule.from_stage_finish_code_m %></td></tr>
+        <tr><th>Winner or Looser Advance</th><td><%= stage_advance_rule.winner_looser_code_m %></td></tr>
+        <tr><th>To Stage</th><td><%= stage_advance_rule.to_stage_name %></td></tr>
+        <tr><th>Unrated Player Advance</th><td><%= stage_advance_rule.unrated_plyr_advance_flag_m %></td></tr>
+
+    </tbody>
+</table>
+
+<div class="well">
+    <%- link_to('<i class="icon-edit icon-white"></i> Edit', path_to.edit_stage_advance_rule(stage_advance_rule), {class: 'btn btn-primary'}) %>
+    <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.stage_advance_rule(stage_advance_rule), {class: 'btn btn-danger', method: 'delete', remote: true, jsonp: '(function (u) { location.href = u; })'}) %>
+    or
+    <%- link_to('Back to index', path_to.stage_advance_rules()) %>
+</div>

@@ -39,6 +39,10 @@
 // Jude Lam        05/13/2012 - Added number_of_tables field to Tournament_v model.
 // Jude Lam        05/14/2012 - Added Stage_v model.
 // Jude Lam        05/18/2012 - Update stages and stages_v model to add division_code and division_code_m fields.
+// Jude Lam        05/20/2012 - Added stage_advance_rules model.
+//                            - Added stage_advance_rules_v model.
+// Jude Lam        05/21/2012 - Updated stage_advance_rules model to rename from_stage_finish to from_stage_finish_code.
+//                            - Updated stage_advance_rules_v model to rename from_stage_finish to from_stage_finish_code.
 
 var Facility = describe('Facility', function () {
     property('facility_code', String);
@@ -255,5 +259,47 @@ var Stage_v = describe('Stage_v', function () {
     property('division_code_m', String);
     property('tournament_id', Number);
     setTableName('stages_v');
+});
+
+var Stage_advance_rule = describe('Stage_advance_rule', function () {
+    property('stage_advance_rule_name', String);
+    property('from_stage_id', Number);
+    property('top_x_finish_code', String, {default: '0'});
+    property('from_stage_finish_code', String, {default: '0'});
+    property('winner_looser_code', String, {default: 'N'});
+    property('to_stage_id', Number);
+    property('event_id', Number);
+    property('unrated_plyr_advance_flag', String, {default: 'N'});
+    property('date_created', Number);
+    property('date_updated', Number);
+    setTableName('stage_advance_rules');
+});
+
+var Stage_advance_rule_v = describe('Stage_advance_rule_v', function () {
+    property('stage_advance_rule_name', String);
+    property('from_stage_id', Number);
+    property('top_x_finish_code', String);
+    property('from_stage_finish_code', String);
+    property('winner_looser_code', String, {default: 'N'});
+    property('to_stage_id', Number);
+    property('event_id', Number);
+    property('unrated_plyr_advance_flag', String, {default: 'N'});
+    property('date_created', Number);
+    property('date_updated', Number);
+    property('event_name', String);
+    property('event_start_time', Number);
+    property('tournament_id', Number);
+    property('tournament_name', String);
+    property('winner_looser_code_m', String);
+    property('unrated_plyr_advance_flag_m', String);
+    property('from_stage_name', String);
+    property('from_stage_sequence', Number);
+    property('from_div_code', String);
+    property('to_stage_name', String);
+    property('to_stage_sequence', Number);
+    property('to_div_code', String);
+    property('top_x_finish_code_m', String);
+    property('from_stage_finish_code_m', String);
+    setTableName('stage_advance_rules_v');
 });
 

@@ -1,4 +1,4 @@
-// File Name: app/controllers/stage_controller.js
+// File Name: app/controllers/stages_controller.js
 // Purpose: Controller module for Player model.
 //
 // Update History
@@ -18,17 +18,18 @@
 // Jude Lam        05/18/2012 - Added the use of loadDivisionList function in before flow.
 // Jude Lam        05/19/2012 - Updated the index method to pass where condition to the customized paginate routine if current tournament id
 //                              is available.
+// Jude Lam        05/20/2012 - Moved the loadCurrentEventsList function back to application_controller.js
 
 load('application');
 
-before(loadStage, {only: ['show', 'edit', 'update', 'destroy']});
+before(loadStage, {only: ['edit', 'update', 'destroy']});
 before(loadStage_v, {only:['show']});
 before(use('loadStageFormatList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the stage_format_list object.
 before(use('loadDrawFormatList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the draw_format_list object.
 before(use('loadSeedBasisList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the seed_basis_list object.
 before(use('loadStageStatusList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the stage_status_list object.
 before(use('loadYesNoList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the stage_status_list object.
-before(loadCurrentEventsList, {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the current_event_list object.
+before(use('loadCurrentEventsList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the current_event_list object.
 before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index','show', 'setDefault', 'update', 'create']});
 before(loadDivisionList, {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the division_list object.
 
@@ -147,35 +148,6 @@ function loadStage_v() {
             next();
         }
     }.bind(this));
-}
-
-// loadCurrentEventsList() will retrieve all events for the "Current Tournament" from the events_v view.
-function loadCurrentEventsList() {
-  Tournament.findOne({where: {'current_flag':'Y'}},function(err, result) {
-    if(err) return err; // stop continue processing if there is any error.
-    if (result != null) {
-      this.tournament = result;
-      // Use the tournament id to find all events.
-      Event_v.all({where: {'tournament_id':this.tournament.id}}, function(err, events) {
-        this.current_event_list = events;
-        var empty_event = new Event_v();
-        empty_event.event_name = 'Not Selected';
-        empty_event.id = '';
-        this.current_event_list.unshift(empty_event); // add the new empty Not Selected list to the top of the array.
-        next(); // process the next tick.
-      }.bind(this));
-    } else {
-      // Use the tournament id to find all events.
-      Event_v.all({order: 'tournament_name, event_name'}, function(err, events) {
-        this.current_event_list = events;
-        var empty_event = new Event_v();
-        empty_event.event_name = 'Not Selected';
-        empty_event.id = '';
-        this.current_event_list.unshift(empty_event); // add the new empty Not Selected list to the top of the array.
-        next(); // process the next tick.
-      }.bind(this));
-    }
-  }.bind(this));
 }
 
 // loadDivisionList() will setup the JSON object for list for Division code.

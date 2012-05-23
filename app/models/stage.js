@@ -8,9 +8,9 @@
 
 // Validation declarations.
 
-Stage.validatesPresenceOf('stage_name', {message: '- Stage Name is required.  Please fill in a value for Stage Name.'});
+Stage.validatesPresenceOf('stage_name', {message: '- Stage Name is required.  Please fill in a value for it.'});
 Stage.validatesLengthOf('stage_name', {allowNull: false, allowBlank: false, max: 80, message: '- Stage Name can only be 80 characters long.'});
-Stage.validatesPresenceOf('stage_sequence', {message: '- Stage Sequence is required.  Please fill in a value for Stage Sequence.'});
+Stage.validatesPresenceOf('stage_sequence', {message: '- Stage Sequence is required.  Please fill in a value for it.'});
 Stage.validatesNumericalityOf('stage_sequence', {allowNull: false, allowBlank: false, int: true, message: '- Stage Sequence must be an integer number.  Please make sure that you do not input decimal number.'});
 Stage.validatesPresenceOf('event_id', {message: '- You must choose an event to be linked to the current stage.'});
 Stage.validatesPresenceOf('stage_format_code', {message: '- Stage Format must be chosen.  Please select an appropriate Stage Format.'});
@@ -32,7 +32,6 @@ Stage.validatesPresenceOf('stage_status_code', {message: '- Stage Status is requ
 // Using Juggling DB hooks for timestamp updates.
 Stage.beforeUpdate = updateTimeStamp;
 Stage.beforeCreate = createTimeStamp;
-//Stage.afterInitialize = stageInitialize;
 
 function updateTimeStamp(done) {
   this.date_updated = (new Date()) - 0;
@@ -44,8 +43,3 @@ function createTimeStamp(done) {
   this.date_updated = (new Date()) - 0;
   done();
 };
-
-// Notice that the stageInitialize() does not call the done().  This is the only exception.
-//function stageInitialize() {
-//
-//};

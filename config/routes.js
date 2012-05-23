@@ -5,8 +5,16 @@
 // Name            Date       Description
 // --------------- ---------- ------------------------------------------------------------------------------
 // Jude Lam        05/05/2012 - Added map.get('setDefault'...) route for setting up current default tournament.
+// Jude Lam        04/06/2012 - Added facilities map.
+// Jude Lam        04/10/2012 - Added versions map.
+// Jude Lam        04/13/2012 - Added players map.
+// Jude Lam        04/21/2012 - Added tournaments map.
+// Jude Lam        04/30/2012 - Added events map.
+// Jude Lam        05/12/2012 - Added stages map.
+// Jude Lam        05/20/2012 - Added stage_advance_rules map.
 
 exports.routes = function (map) {
+    map.resources('stage_advance_rules');
     map.resources('stages');
     map.resources('events');
     map.resources('tournaments');

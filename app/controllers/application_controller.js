@@ -15,6 +15,8 @@
 //                            - Added the loadYesNoList function.
 // Jude Lam        05/16/2012 - Added the loadCurrentTournament function.
 //                            - Moved the loadCurrentEventsList function back to stages_controller.js file.
+// Jude Lam        05/20/2012 - Moved the loadCurrentEventsList function back to application_controler.js for 
+//                              stage_advance_rules to use.
 
 before('protect from forgery', function () {
     protectFromForgery('b01ad3d4b1c2c4bc37460acab9b07e039959ffae');
@@ -35,6 +37,7 @@ publish('loadDrawFormatList', loadDrawFormatList);
 publish('loadSeedBasisList', loadSeedBasisList);
 publish('loadYesNoList', loadYesNoList);
 publish('loadCurrentTournament', loadCurrentTournament);
+publish('loadCurrentEventsList', loadCurrentEventsList);
 
 // loadStateList() will setup the JSON object for list of state.  For now, this is only working for US states.
 function loadStateList() {
@@ -180,5 +183,34 @@ function loadCurrentTournament() {
       this.currTournamentId = -999;
     }
     next();
+  }.bind(this));
+}
+
+// loadCurrentEventsList() will retrieve all events for the "Current Tournament" from the events_v view.
+function loadCurrentEventsList() {
+  Tournament.findOne({where: {'current_flag':'Y'}},function(err, result) {
+    if(err) return err; // stop continue processing if there is any error.
+    if (result != null) {
+      this.tournament = result;
+      // Use the tournament id to find all events.
+      Event_v.all({where: {'tournament_id':this.tournament.id}}, function(err, events) {
+        this.current_event_list = events;
+        var empty_event = new Event_v();
+        empty_event.event_name = 'Not Selected';
+        empty_event.id = '';
+        this.current_event_list.unshift(empty_event); // add the new empty Not Selected list to the top of the array.
+        next(); // process the next tick.
+      }.bind(this));
+    } else {
+      // Use the tournament id to find all events.
+      Event_v.all({order: 'tournament_name, event_name'}, function(err, events) {
+        this.current_event_list = events;
+        var empty_event = new Event_v();
+        empty_event.event_name = 'Not Selected';
+        empty_event.id = '';
+        this.current_event_list.unshift(empty_event); // add the new empty Not Selected list to the top of the array.
+        next(); // process the next tick.
+      }.bind(this));
+    }
   }.bind(this));
 }

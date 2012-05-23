@@ -1,0 +1,60 @@
+<div class="page-header">
+  <div class="row">
+    <div class="span4">
+      <h1>List of Stage Advance Rules</h1>
+    </div>
+    <div class="span8 pagination-right">
+      <h3>Current Default Tournament: <%= currTournamentName %></h3>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <p><%- link_to('<i class="icon-plus icon-white"></i> New Stage Advance Rule', path_to.new_stage_advance_rule(), {class: 'btn btn-primary'}) %></>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <% if (stage_advance_rules.length > 0) { %>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Event</th>
+                        <th>Rule Name</th>
+                        <th>From Stage</th>
+                        <th>Top X</br>Finish</th>
+                        <th>From Stage</br>Finish</th>
+                        <th>Winner</br>Looser</br>Advance?</th>
+                        <th>To Stage</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% stage_advance_rules.forEach(function (stage_advance_rule) { %>
+                        <tr>
+                            <td><strong><%- link_to(stage_advance_rule.id, path_to.stage_advance_rule(stage_advance_rule)) %></strong></td>
+                            <td><%= stage_advance_rule.event_name %></td>
+                            <td><%= stage_advance_rule.stage_advance_rule_name %></td>
+                            <td><%= stage_advance_rule.from_stage_name %></td>
+                            <td><%= stage_advance_rule.top_x_finish_code_m %></td>
+                            <td><%= stage_advance_rule.from_stage_finish_code_m %></td>
+                            <td><%= stage_advance_rule.winner_looser_code_m %></td>
+                            <td><%= stage_advance_rule.to_stage_name %></td>
+                            <td>
+                                <%- link_to('<i class="icon-edit"></i> Edit', path_to.edit_stage_advance_rule(stage_advance_rule), {class: 'btn btn-mini'}) %>
+                                <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.stage_advance_rule(stage_advance_rule), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>        
+                            </td>
+                        </tr>
+                    <% }); %>        
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="alert alert-block alert-info">
+                <strong>No Stage Advance Rules were found.  Please check to make sure that you have chosen a default Tournament that has Event/Stages/Stage Advance Rules defined first.</strong>
+            </p>
+        <% } %>
+    </div>
+</div>
