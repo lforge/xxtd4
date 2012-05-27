@@ -12,6 +12,7 @@
 //                            - Added loadStageAdvanceRule_v function call in before flow.
 //                            - Added loadTopXFinishList function call in before flow.
 // Jude Lam        05/21/2012 - Added loadFromStageFinishList function call in before flow.
+// Jude Lam        05/26/2012 - Added buildAjaxFromStageList and buildAjaxToStageList functions for AJAX dynamic From/To Stage LOV build.
 
 load('application');
 
@@ -32,6 +33,15 @@ var v_form_title_p = 'Stage Advance Rules';
 action('new', function () {
 	  this.title = 'New '+ v_form_title_s;  // Updated to use new controller level variable.
     this.stage_advance_rule = new Stage_advance_rule;
+
+    // Setup empty list to start.
+    var empty_stage = [];
+    empty_stage[0] = new Stage();
+    empty_stage[0].stage_name = 'Not Selected';
+    empty_stage[0].id = "";
+    this.from_stage_list = empty_stage;
+    this.to_stage_list = empty_stage;
+
     render();
 });
 
@@ -68,11 +78,55 @@ action(function show() {
 
 action(function edit() {
     this.title = 'Edit ' + v_form_title_s;  // Updated to use new controller level variable.
-    render();
+
+    // Retrieve list of values for Stage to build from_stage_list.
+    Stage.all({where: {'event_id':this.stage_advance_rule.event_id}, order: 'stage_sequence, division_code'}, function(err, from_stages) {
+      if(err) return err;
+      this.from_stage_list = from_stages;
+
+      // Retrieve list of values for Stage to build to_stage_list.
+      Stage.all({where: {'event_id':this.stage_advance_rule.event_id}, order: 'stage_sequence, division_code'}, function(err, to_stages){
+        if(err) return err;
+        this.to_stage_list = to_stages;
+        render();
+      }.bind(this));
+    }.bind(this));
+});
+
+// AJAX function to retrieve From Stage list based on event id.  Only the stages that are not a final stage can be listed under From Stage.
+action(function buildAjaxFromStageList() {
+
+    //Retrieve list of values for Stage to build from_stage_list.
+    Stage.all({where: {'event_id':params.event_id, 'final_stage_flag': 'N'}, order: 'stage_sequence, division_code'}, function(err, from_stages) {
+      if(err) return err;
+      this.from_stage_list = from_stages;
+      // add an empty Not select value.
+      var empty_stage = new Stage();
+      empty_stage.stage_name = 'Not Selected';
+      empty_stage.id = "";
+      this.from_stage_list.unshift(empty_stage); // add the new empty Not Selected list to the top of the array.
+      send(this.from_stage_list);
+    }.bind(this));
+});
+
+// AJAX function to retrieve To Stage list based on event id.
+action(function buildAjaxToStageList() {
+
+    //Retrieve list of values for Stage to build from_stage_list.
+    Stage.all({where: {'event_id':params.event_id}, order: 'stage_sequence, division_code'}, function(err, from_stages) {
+      if(err) return err;
+      this.from_stage_list = from_stages;
+      // add an empty Not select value.
+      var empty_stage = new Stage();
+      empty_stage.stage_name = 'Not Selected';
+      empty_stage.id = "";
+      this.from_stage_list.unshift(empty_stage); // add the new empty Not Selected list to the top of the array.
+      send(this.from_stage_list);
+    }.bind(this));
 });
 
 action(function update() {
-    this.stage_advance_rule.updateAttributes(body.StageAdvanceRule, function (err) {
+    this.stage_advance_rule.updateAttributes(body.Stage_advance_rule, function (err) {
         if (!err) {
             flash('info', v_form_title_s + ' is updated.');
             redirect(path_to.stage_advance_rules());
@@ -135,7 +189,7 @@ function loadTopXFinishList() {
 
 // loadFromStageFinishList() will setup the JSON object for list of Winner Looser code.
 function loadFromStageFinishList() {
-	Lookup.all({where: {'lookup_type':'FROM_STAGE_FINISH'}}, function(err, lookups){
+	Lookup.all({where: {'lookup_type':'FROM_STAGE_FINISH'}, order: 'lookup_code - 0'}, function(err, lookups){
 	 this.from_stage_finish_list = lookups;
 	 next(); // process the next tick.  If you don't put it here, it will stuck at this point.
 	}.bind(this));

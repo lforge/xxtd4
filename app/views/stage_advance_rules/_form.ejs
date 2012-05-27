@@ -15,8 +15,9 @@
 
 <div class="control-group">
    <%- form.label("from_stage_id", "From Stage", {class: "control-label"}) %>
-   <div class="controls">
-       <%- form.input("from_stage_id") %>
+   <div class="controls" id="fromStageId">
+<!--       <%- form.input("from_stage_id") %>-->
+     <%- xxtd_createDropDown("Stage_advance_rule_from_stage_id", "Stage_advance_rule[from_stage_id]", from_stage_list, stage_advance_rule.from_stage_id, "stage_name", "id") %>
    </div>
 </div>
 <div class="control-group">
@@ -27,7 +28,7 @@
    </div>
 </div>
 <div class="control-group">
-   <%- form.label("from_stage_finish", "From Stage Finish", {class: "control-label"}) %>
+   <%- form.label("from_stage_finish_code", "From Stage Finish", {class: "control-label"}) %>
    <div class="controls">
 <!--       <%- form.input("from_stage_finish") %> -->
      <%- xxtd_createDropDown("Stage_advance_rule_from_stage_finish_code", "Stage_advance_rule[from_stage_finish_code]", from_stage_finish_list, stage_advance_rule.from_stage_finish_code, "meaning", "lookup_code") %>
@@ -42,8 +43,9 @@
 </div>
 <div class="control-group">
    <%- form.label("to_stage_id", "To Stage", {class: "control-label"}) %>
-   <div class="controls">
-       <%- form.input("to_stage_id") %>
+   <div class="controls" id="toStageId">
+<!--       <%- form.input("to_stage_id") %>-->
+     <%- xxtd_createDropDown("Stage_advance_rule_to_stage_id", "Stage_advance_rule[to_stage_id]", to_stage_list, stage_advance_rule.to_stage_id, "stage_name", "id") %>
    </div>
 </div>
 

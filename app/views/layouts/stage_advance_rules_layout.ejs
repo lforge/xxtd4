@@ -29,7 +29,66 @@
 <script>
     // Activate the bootsrap dropdown JQuery plug-in.
     $(document).ready(function () {
-        $(".dropdown-toggle").dropdown();
+      $(".dropdown-toggle").dropdown();
+    });
+
+    // AJAX to build From Stage Id dynamic drop down.
+    // Setup the object and construct.
+    var buildStageLOV = {
+      load: function(inUrl, divId, fId, fName) {
+        $.ajax({
+          type: "GET",
+          url: inUrl,
+          dataType: "json",
+          success: function(data) {
+
+            // Start building the html text.
+            var selectTag = '';
+
+            // Only do something when there is value in the f_list.
+            if (data.length > 0) {
+
+              // Setup the opening tag for select.
+              selectTag = '<select id="' + fId + '" name="' + fName + '" size="1">';
+
+              data.forEach(function(f_list_entry) {
+
+                // Setup the option tag with selected = specified.
+                selectTag = selectTag + '<option value = "' + f_list_entry['id'] + '" ';
+
+                // close the bracket.
+                selectTag = selectTag + '>' + f_list_entry['stage_name'] + '</option>';
+              });  // End of forEach loop.
+
+              // close out the select tag
+              selectTag = selectTag + '</select>';
+
+            }  // end of if f_list.length > 1 check.
+
+            $(divId).html(selectTag);
+          }
+        });
+      } // end of load.
+    };
+
+    $('#Stage_advance_rule_event_id').change(function(e) {
+      var url = '/stage_advance_rules/buildFromStage/' + $('#Stage_advance_rule_event_id').val() + '.json';
+      buildStageLOV.load(url, '#fromStageId', 'Stage_advance_rule_from_stage_id', 'Stage_advance_rule[from_stage_id]');
+      var url = '/stage_advance_rules/buildToStage/' + $('#Stage_advance_rule_event_id').val() + '.json';
+      buildStageLOV.load(url, '#toStageId', 'Stage_advance_rule_to_stage_id', 'Stage_advance_rule[to_stage_id]');
+    });
+
+    // Verify that the From and To stage cannot be the same.
+    $('#stage_advance_rule_form').bind('submit', function(event) {
+        if($('#Stage_advance_rule_from_stage_id').val() === $('#Stage_advance_rule_to_stage_id').val()) {
+          var msg = "From and To Stage cannot be the same.  Please correct the issue before submitting the change.";
+          if ($('#errMsg')) {
+            // Remove the existing element.
+            $('#errMsg').remove();
+          }
+          $('.page-header').before('<div class="alert alert-error" id="errMsg"><a class="close" data-dismiss="alert">x</a>' + msg + '</div>');
+          event.preventDefault();
+        }
     });
 
 </script>

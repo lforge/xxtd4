@@ -26,9 +26,7 @@ module.exports = {
   // code_name = the column name of the f_list that contains the internal code, e.g. for lookup_codes table list, this will be "lookup_code".
   xxtd_createDropDown: function(fid, fname, f_list, current_code, meaning_name, code_name) {
     var selectTag = '';
-    //var f_id = resource.constructor.modelName + '_' + fname;
     var f_id = fid;
-    //var f_name = resource.constructor.modelName + '[' + fname + ']';
     var f_name = fname;
 
     // Only do something when there is value in the f_list.
@@ -40,7 +38,7 @@ module.exports = {
 
         // Setup the option tag with selected = specified.
         selectTag = selectTag + '<option value = "' + f_list_entry[code_name] + '" ';
-        //if ((current_code != null) && (current_code == f_list_entry[code_name])) {
+
         if (current_code == f_list_entry[code_name]) {
           selectTag = selectTag + 'selected = "selected"';
         }

@@ -58,9 +58,6 @@ action(function index() {
         });
        }
     });
-
-
-
 });
 
 action(function show() {

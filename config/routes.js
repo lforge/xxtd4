@@ -12,6 +12,7 @@
 // Jude Lam        04/30/2012 - Added events map.
 // Jude Lam        05/12/2012 - Added stages map.
 // Jude Lam        05/20/2012 - Added stage_advance_rules map.
+// Jude Lam        05/26/2012 - Added stage_advance_rules/buildFromStage and buildToStage route for AJAX call.
 
 exports.routes = function (map) {
     map.resources('stage_advance_rules');
@@ -22,6 +23,8 @@ exports.routes = function (map) {
     map.resources('versions', {only: ['index']});  // only response to the index "/versions" request.
     map.resources('facilities');
     map.get('setDefault', 'tournaments#setDefault');
+    map.get('stage_advance_rules/buildFromStage/:event_id.:format?', 'stage_advance_rules#buildAjaxFromStageList');
+    map.get('stage_advance_rules/buildToStage/:event_id.:format?', 'stage_advance_rules#buildAjaxToStageList');
 
     // Generic routes. Add all your routes below this line
     // feel free to remove generic routes
