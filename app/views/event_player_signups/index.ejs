@@ -1,0 +1,63 @@
+<div class="page-header">
+  <div class="row">
+    <div class="span4">
+      <h1>Current Tournament Event Signups</h1>
+    </div>
+    <div class="span8 pagination-right">
+      <h3>Current Default Tournament: <%= currTournamentName %></h3>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="span6">
+        <p><%- link_to('<i class="icon-plus icon-white"></i> New Event Player Signup Record', path_to.new_event_player_signup(), {class: 'btn btn-primary'}) %></>
+    </div>
+    <div class="span6">
+        <%- paginate(stages) %>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <% if (event_player_signups.length > 0) { %>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Event Name</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Event Entry Rating</th>
+                        <th>Event Seeding Rating</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% event_player_signups.forEach(function (event_player_signup) { %>
+                        <tr>
+                            <td><strong><%- link_to(event_player_signup.id, path_to.event_player_signup(event_player_signup)) %></strong></td>
+                            <td><%= event_player_signup.event_name %></td>
+                            <td><%= event_player_signup.last_name %></td>
+                            <td><%= event_player_signup.first_name %></td>
+                            <td><%= event_player_signup.city %></td>
+                            <td><%= event_player_signup.state_or_province %></td>
+                            <td><%= event_player_signup.event_rating %></td>
+                            <td><%= event_player_signup.seeding_rating %></td>
+                            <td>
+                                <%- link_to('<i class="icon-edit"></i> Edit', path_to.edit_event_player_signup(event_player_signup), {class: 'btn btn-mini'}) %>
+                                <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.event_player_signup(event_player_signup), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>        
+                            </td>
+                        </tr>
+                    <% }); %>        
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="alert alert-block alert-info">
+                <strong>No Event Player Signup records were found.</strong> 
+            </p>
+        <% } %>
+    </div>
+</div>

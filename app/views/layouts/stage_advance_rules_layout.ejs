@@ -68,7 +68,16 @@
             $(divId).html(selectTag);
           }
         });
-      } // end of load.
+      }, // end of load.
+      showErrMsg: function(msg) {
+
+        if ($('#errMsg')) {
+        // Remove the existing element.
+            $('#errMsg').remove();
+        }
+        $('.page-header').before('<div class="alert alert-error" id="errMsg"><a class="close" data-dismiss="alert">x</a>' + msg + '</div>');
+
+      } // end of showErrMsg
     };
 
     $('#Stage_advance_rule_event_id').change(function(e) {
@@ -78,23 +87,36 @@
       buildStageLOV.load(url, '#toStageId', 'Stage_advance_rule_to_stage_id', 'Stage_advance_rule[to_stage_id]');
     });
 
-    // Verify that the From and To stage cannot be the same.
     $('#stage_advance_rule_form').bind('submit', function(event) {
+
+        var msg = "";
+
+        // Verify that the From and To stage cannot be the same.
         if($('#Stage_advance_rule_from_stage_id').val() === $('#Stage_advance_rule_to_stage_id').val()) {
-          var msg = "From and To Stage cannot be the same.  Please correct the issue before submitting the change.";
-          if ($('#errMsg')) {
-            // Remove the existing element.
-            $('#errMsg').remove();
-          }
-          $('.page-header').before('<div class="alert alert-error" id="errMsg"><a class="close" data-dismiss="alert">x</a>' + msg + '</div>');
+          msg = "From and To Stage cannot be the same.  Please correct the issue before submitting the change.";
+          buildStageLOV.showErrMsg(msg);
           event.preventDefault();
         }
+
+        // Verify that the From Stage Finish code cannot be 0 if Top X Finish is set to N/A.
+        if($('#Stage_advance_rule_top_x_finish_code').val() === "0" && $('#Stage_advance_rule_from_stage_finish_code').val() === "0") {
+          msg = "Top X Finish must be N/A if From Stage Finish is selected. Please update the two fields accordingly.";
+          buildStageLOV.showErrMsg(msg);
+          event.preventDefault();
+        }
+
+        // Verify that the From Stage Finish code must be 0 if Top X Finish is set to something other than N/A.
+        if($('#Stage_advance_rule_top_x_finish_code').val() != "0" && $('#Stage_advance_rule_from_stage_finish_code').val() != "0") {
+          msg = "From Stage Finish must be N/A if Top X Finish is selected. Please update the two fields accordingly.";
+          buildStageLOV.showErrMsg(msg);
+          event.preventDefault();
+        }        
     });
 
 </script>
             <hr />
             <footer>
-                <p>&copy; Company 2012</p>
+                <p><%= xxtd_DisplayFooter() %></p>
             </footer>
         </div>
     </body>

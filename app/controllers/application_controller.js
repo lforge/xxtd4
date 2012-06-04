@@ -17,6 +17,7 @@
 //                            - Moved the loadCurrentEventsList function back to stages_controller.js file.
 // Jude Lam        05/20/2012 - Moved the loadCurrentEventsList function back to application_controler.js for 
 //                              stage_advance_rules to use.
+// Jude Lam        05/30/2012 - Added the loadPlayerList function.
 
 before('protect from forgery', function () {
     protectFromForgery('b01ad3d4b1c2c4bc37460acab9b07e039959ffae');
@@ -38,6 +39,7 @@ publish('loadSeedBasisList', loadSeedBasisList);
 publish('loadYesNoList', loadYesNoList);
 publish('loadCurrentTournament', loadCurrentTournament);
 publish('loadCurrentEventsList', loadCurrentEventsList);
+publish('loadPlayerList', loadPlayerList);
 
 // loadStateList() will setup the JSON object for list of state.  For now, this is only working for US states.
 function loadStateList() {
@@ -212,5 +214,29 @@ function loadCurrentEventsList() {
         next(); // process the next tick.
       }.bind(this));
     }
+  }.bind(this));
+}
+
+// loadPlayerList() will retrieve all players.
+function loadPlayerList() {
+  Player_v.all({order: 'id'}, function(err, results) {
+    var players = [];
+    var player = {};
+    player.player_name = 'Not Selected';
+    player.id = "";
+    players[0] = player;
+
+    if(results.length > 0) {
+      for (var i = 0; i < results.length; i++) {
+        // create a brand new instance of player object for every record.  One cannot reuse the same player variable.
+        var player = { player_name: results[i].first_name + " " + results[i].last_name + "-" + results[i].city + "/" + results[i].state_or_province,
+                       id: results[i].id};
+        players.push(player);
+      }
+    } // end of if.
+
+    this.player_list = players;
+
+    next(); // process the next tick.
   }.bind(this));
 }

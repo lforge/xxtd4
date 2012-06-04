@@ -18,8 +18,8 @@ load('application');
 
 before(loadStageAdvanceRule, {only: ['edit', 'update', 'destroy']});
 before(loadStageAdvanceRule_v, {only: ['show']});
-before(use('loadYesNoList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the stage_status_list object.
-before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index','show', 'setDefault', 'update', 'create']});
+before(use('loadYesNoList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the yes_no_list object.
+before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index','show', 'update', 'create']});
 before(use('loadCurrentEventsList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the current_event_list object.
 before(loadWinnerLooserList, {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the winner_looser_list object.
 before(loadTopXFinishList, {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the top_x_finish_list object.
@@ -141,7 +141,7 @@ action(function update() {
 action(function destroy() {
     this.stage_advance_rule.destroy(function (error) {
         if (error) {
-            flash('error', 'Can not destroy Stage Advance Rule.');
+            flash('error', 'Can not delete Stage Advance Rule.');
         } else {
             flash('info', 'Stage Advance Rule is successfully removed.');
         }

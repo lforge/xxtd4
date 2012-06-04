@@ -1,0 +1,29 @@
+<div class="page-header">
+  <div class="row">
+    <div class="span4">
+      <h1>Detail of a Event Player Signup Record</h1>
+    </div>
+    <div class="span8 pagination-right">
+      <h3>Current Default Tournament: <%= currTournamentName %></h3>
+    </div>
+  </div>
+</div>
+
+<table class="table table-bordered">
+    <tbody>
+        <tr><th>Event Name</th><td><%= event_player_signup.event_name %></td></tr>
+        <tr><th>Player First Name</th><td><%= event_player_signup.first_name %></td></tr>
+        <tr><th>Player Last Name</th><td><%= event_player_signup.last_name %></td></tr>
+        <tr><th>Player Seeding</th><td><%= event_player_signup.player_seeding %></td></tr>
+        <tr><th>Event Rating</th><td><%= event_player_signup.event_rating %></td></tr>
+        <tr><th>Rating Estimate Flag</th><td><%= event_player_signup.rating_estimate_flag_m %></td></tr>
+        <tr><th>Seeding Rating</th><td><%= event_player_signup.seeding_rating %></td></tr>
+    </tbody>
+</table>
+
+<div class="well">
+    <%- link_to('<i class="icon-edit icon-white"></i> Edit', path_to.edit_event_player_signup(event_player_signup), {class: 'btn btn-primary'}) %>
+    <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.event_player_signup(event_player_signup), {class: 'btn btn-danger', method: 'delete', remote: true, jsonp: '(function (u) { location.href = u; })'}) %>
+    or
+    <%- link_to('Back to index', path_to.event_player_signups()) %>
+</div>

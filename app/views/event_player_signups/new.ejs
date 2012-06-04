@@ -1,0 +1,18 @@
+<div class="page-header">
+  <div class="row">
+    <div class="span4">
+      <h1>New Event Player Signup record</h1>
+    </div>
+    <div class="span8 pagination-right">
+      <h3>Current Default Tournament: <%= currTournamentName %></h3>
+    </div>
+  </div>
+</div>
+
+<% form_for(event_player_signup, {action: path_to.event_player_signups(), method: 'POST', id: "event_player_signup_form", class: 'form-horizontal'}, function (form) { %>
+    <%- partial('event_player_signups/form.ejs', {locals: {form: form, event_player_signup: event_player_signup, yes_no_list: yes_no_list, current_event_list: current_event_list, player_list: player_list}}) %>
+    <div class="form-actions">
+        <%- form.submit('<i class="icon-ok icon-white"></i> Create Event Player Signup', {class: 'btn btn-primary'}) %> or
+        <%- link_to('Cancel', path_to.event_player_signups(), {class: 'btn'}) %>
+    </div>
+<% });%>

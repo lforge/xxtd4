@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><%= title %></title>
+        <%- stylesheet_link_tag('bootstrap', 'style', 'bootstrap-responsive', 'bootstrap.min', 'ui-lightness/jquery-ui-1.8.18.custom') %>
+        <%- javascript_include_tag('jquery-1.7.1.min', 'jquery-ui-1.8.18.custom.min', 'bootstrap', 'rails', 'application', 'bootstrap-dropdown', 'bootstrap-modal', 'jquery.maskedinput-1.3.min', 'jquery-ui-timepicker-addon') %>
+        <%- csrf_meta_tag() %>
+    </head>
+    <body>
+
+      <%- partial('menu.ejs') %>
+            
+        <div class="container">
+            <% var flash = request.flash('info').pop(); if (flash) { %>
+                <div class="alert alert-info">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <%- flash %>
+                </div>
+            <% } %>
+            
+            <% flash = request.flash('error').pop(); if (flash) { %>
+                <div class="alert alert-error">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <%- flash %>
+                </div>
+            <% }; %>
+            
+            <%- body %>
+
+<script>
+    // Activate the bootsrap dropdown JQuery plug-in.
+    $(document).ready(function () {
+      $(".dropdown-toggle").dropdown();
+    });
+
+    // display help text for eventRating field.
+    $('#Event_player_signup_event_rating').focus( function() {
+      $('#eventRatingDesc').html("Enter the player's rating when the player is entering the event.  This may or may not be the player's latest rating.  This is the rating on the entry form.");
+    });
+
+    $('#Event_player_signup_seeding_rating').focus( function() {
+      $('#seedingRatingDesc').html("Enter the player's latest rating based on the event rating cutoff date.");
+    });
+
+/**    $('#Event_player_signup_event_rating').blur( function() {
+      $('#eventRatingDesc').html("");
+    });
+
+    $('#Event_player_signup_seeding_rating').blur( function() {
+      $('#seedingRatingDesc').html("");
+    });
+**/
+
+</script>
+            <hr />
+            <footer>
+                <p><%= xxtd_DisplayFooter() %></p>
+            </footer>
+        </div>
+    </body>
+</html>

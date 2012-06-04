@@ -43,6 +43,8 @@
 //                            - Added stage_advance_rules_v model.
 // Jude Lam        05/21/2012 - Updated stage_advance_rules model to rename from_stage_finish to from_stage_finish_code.
 //                            - Updated stage_advance_rules_v model to rename from_stage_finish to from_stage_finish_code.
+// Jude Lam        05/30/2012 - Added event_player_signups model.
+// Jude Lam        06/03/2012 - Added event_player_signups_v view model.
 
 var Facility = describe('Facility', function () {
     property('facility_code', String);
@@ -301,5 +303,38 @@ var Stage_advance_rule_v = describe('Stage_advance_rule_v', function () {
     property('top_x_finish_code_m', String);
     property('from_stage_finish_code_m', String);
     setTableName('stage_advance_rules_v');
+});
+
+var Event_player_signup = describe('Event_player_signup', function () {
+    property('player_id', Number);
+    property('event_id', Number);
+    property('player_seeding', Number);
+    property('event_rating', Number);
+    property('rating_estimate_flag', String, {default: 'N'});
+    property('seeding_rating', Number);
+    property('date_created', Number);
+    property('date_updated', Number);
+    setTableName('event_player_signups');
+});
+
+var Event_player_signup_v = describe('Event_player_signup_v', function () {
+    property('player_id', Number);
+    property('event_id', Number);
+    property('player_seeding', Number);
+    property('event_rating', Number);
+    property('rating_estimate_flag', String, {default: 'N'});
+    property('seeding_rating', Number);
+    property('date_created', Number);
+    property('date_updated', Number);
+    property('first_name', String);
+    property('last_name', String);
+    property('city', String);
+    property('state_or_province', String);
+    property('usatt_number', String);
+    property('event_name', String);
+    property('event_start_time', Number);
+    property('tournament_id', Number);
+    property('rating_estimate_flag_m', String);
+    setTableName('event_player_signups_v');
 });
 

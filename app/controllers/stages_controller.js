@@ -119,7 +119,7 @@ action(function update() {
 action(function destroy() {
     this.stage.destroy(function (error) {
         if (error) {
-            flash('error', 'Can not destroy stage.');
+            flash('error', 'Can not delete stage.');
         } else {
             flash('info', 'Stage is successfully removed.');
         }

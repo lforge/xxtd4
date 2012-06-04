@@ -13,8 +13,10 @@
 // Jude Lam        05/12/2012 - Added stages map.
 // Jude Lam        05/20/2012 - Added stage_advance_rules map.
 // Jude Lam        05/26/2012 - Added stage_advance_rules/buildFromStage and buildToStage route for AJAX call.
+// Jude Lam        05/30/2012 - Added event_player_signups map.
 
 exports.routes = function (map) {
+    map.resources('event_player_signups');
     map.resources('stage_advance_rules');
     map.resources('stages');
     map.resources('events');

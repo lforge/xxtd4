@@ -1,0 +1,38 @@
+<div class="control-group">
+   <%- form.label("event_id", 'Event', {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("event_id") %>-->
+     <%- xxtd_createDropDown("Event_player_signup_event_id", "Event_player_signup[event_id]", current_event_list, event_player_signup.event_id, "event_name", "id") %>
+   </div>
+</div>
+
+<%- errorMessagesFor(event_player_signup) %>
+<div class="control-group">
+   <%- form.label("player_id", 'Player', {class: "control-label"}) %>
+   <div class="controls">
+<!--       <%- form.input("player_id") %> -->
+     <%- xxtd_createDropDown("Event_player_signup_player_id", "Event_player_signup[player_id]", player_list, event_player_signup.player_id, "player_name", "id") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("event_rating", 'Event Entry Rating', {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("event_rating") %><span id = "eventRatingDesc" class="help-block"></span>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("rating_estimate_flag", 'Rating Estimate Flag', {class: "control-label"}) %>
+   <div class="controls">
+<!--     <%- form.input("rating_estimate_flag") %>-->
+     <%- xxtd_createDropDown("Event_player_signup_rating_estimate_flag", "Event_player_signup[rating_estimate_flag]", yes_no_list, event_player_signup.rating_estimate_flag, "meaning", "lookup_code") %>
+   </div>
+</div>
+<div class="control-group">
+   <%- form.label("seeding_rating", 'Event Seeding Rating', {class: "control-label"}) %>
+   <div class="controls">
+       <%- form.input("seeding_rating") %><span id = "seedingRatingDesc" class="help-block"></span>
+   </div>
+</div>
+
+<%- form.input("date_created", {type: "hidden"}) %>
+<%- form.input("date_updated", {type: "hidden"}) %>
