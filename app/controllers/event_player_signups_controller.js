@@ -1,5 +1,5 @@
 // File Name: app/controllers/event_player_signups_controller.js
-// Purpose: Controller module for Player model.
+// Purpose: Controller module for Event Player Signups model.
 //
 // Update History
 // Name            Date       Description

@@ -1,5 +1,5 @@
 // File Name: app/controllers/stage_advance_rules_controller.js
-// Purpose: Controller module for Player model.
+// Purpose: Controller module for Stage Advance Rules model.
 //
 // Update History
 // Name            Date       Description

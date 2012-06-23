@@ -1,0 +1,58 @@
+<div class="page-header">
+  <div class="row">
+    <div class="span4">
+      <h1>List of Draws</h1>
+    </div>
+    <div class="span8 pagination-right">
+      <h3>Current Default Tournament: <%= currTournamentName %></h3>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <p><%- link_to('<i class="icon-backward icon-white"></i> Back To Stage Draws', path_to.stage_draws(), {class: 'btn btn-primary'}) %></>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <% if (draws.length > 0) { %>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Draw Name</th>
+                        <th>Event Name</th>
+                        <th>Stage Name</th>
+                        <th>Draw Status</th>
+                        <th>Version</th>
+                        <th>Used In Stage?</th>
+                        <th>Number of<br>Groups</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% draws.forEach(function (draw) { %>
+                        <tr>
+                            <td><strong><%- link_to(draw.draw_name, path_to.draw(draw)) %></strong></td>
+                            <td><%= draw.event_name %></td>
+                            <td><%= draw.stage_name %></td>
+                            <td><%= draw.draw_status_code_m %></td>
+                            <td><%= draw.version %></td>
+                            <td><%= draw.used_in_stage_flag_m %></td>
+                            <td><%= draw.group_count %></td>
+                            <td>
+                                <%- link_to('<i class="icon-edit"></i> Edit', path_to.edit_draw(draw), {class: 'btn btn-mini'}) %>
+                                <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.draw(draw), {class: 'btn btn-mini btn-danger', method: 'delete', remote: true, jsonp: '(function (u) {location.href = u;})'}) %>        
+                            </td>
+                        </tr>
+                    <% }); %>        
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="alert alert-block alert-info">
+                <strong>No draws were found.</strong> 
+            </p>
+        <% } %>
+    </div>
+</div>

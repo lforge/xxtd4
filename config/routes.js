@@ -14,12 +14,23 @@
 // Jude Lam        05/20/2012 - Added stage_advance_rules map.
 // Jude Lam        05/26/2012 - Added stage_advance_rules/buildFromStage and buildToStage route for AJAX call.
 // Jude Lam        05/30/2012 - Added event_player_signups map.
+// Jude Lam        06/10/2012 - Added draws map.
+// Jude Lam        06/23/2012 - Added the stage_draws/:stage_id/draws map.
 
 exports.routes = function (map) {
+    map.resources('draws');
+    map.get('stage_draws/:stage_id/draws', 'draws#index');
+    map.resources('stage_draws', {only: ['index']}, function(stage_draw) {
+      stage_draw.resources('draws');
+    });
+//    map.resources('stage_draw', function(stage_draw) {
+//      stage_draw.resources('draws');
+//    });
     map.resources('event_player_signups');
     map.resources('stage_advance_rules');
     map.resources('stages');
-    map.resources('events');
+    map.resources('events', function(event) {event.resources('stages');
+    });
     map.resources('tournaments');
     map.resources('players');
     map.resources('versions', {only: ['index']});  // only response to the index "/versions" request.

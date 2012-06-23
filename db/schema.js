@@ -45,6 +45,8 @@
 //                            - Updated stage_advance_rules_v model to rename from_stage_finish to from_stage_finish_code.
 // Jude Lam        05/30/2012 - Added event_player_signups model.
 // Jude Lam        06/03/2012 - Added event_player_signups_v view model.
+// Jude Lam        06/10/2012 - Added draws model.
+//                            - Added stage_draws_v model.
 
 var Facility = describe('Facility', function () {
     property('facility_code', String);
@@ -263,6 +265,10 @@ var Stage_v = describe('Stage_v', function () {
     setTableName('stages_v');
 });
 
+Event.hasMany(Stage_v, {as: 'stages', foreignKey: 'event_id'});
+Stage_v.belongsTo(Event, {as: 'event', foreignKey: 'event_id'});
+
+
 var Stage_advance_rule = describe('Stage_advance_rule', function () {
     property('stage_advance_rule_name', String);
     property('from_stage_id', Number);
@@ -336,5 +342,54 @@ var Event_player_signup_v = describe('Event_player_signup_v', function () {
     property('tournament_id', Number);
     property('rating_estimate_flag_m', String);
     setTableName('event_player_signups_v');
+});
+
+var Draw = describe('Draw', function () {
+    property('draw_name', String);
+    property('draw_status_code', String, {default: 'N'});
+    property('version', String);
+    property('stage_id', String);
+    property('used_in_stage_flag', String, {default: 'N'});
+    property('date_created', Number);
+    property('date_updated', Number);
+    setTableName('draws');
+});
+
+Stage.hasMany(Draw, {as: 'draws', foreignKey: 'stage_id'});
+Draw.belongsTo(Stage, {as: 'stage', foreignKey: 'stage_id'});
+
+var StageDraws_v = describe('StageDraws_v', function () {
+    property('stage_name', String);
+    property('stage_sequence', Number);
+    property('event_id', Number);
+    property('tournament_name', String);
+    property('event_name', String);
+    property('event_start_time', Number);
+    property('stage_format_code_m', String);
+    property('final_stage_flag_m', String);
+    property('stage_status_code_m', String);
+    property('division_code_m', String);
+    property('tournament_id', Number);
+    property('draw_count', Number);
+    setTableName('stage_draws_v');
+});
+
+StageDraws_v.hasMany(Draw, {as: 'draws', foreignKey: 'stage_id'});
+Draw.belongsTo(StageDraws_v, {as: 'stage_draws', foreignKey: 'stage_id'});
+
+var Draw_v = describe('Draw_v', function () {
+    property('draw_name', String);
+    property('draw_status_code', String, {default: 'N'});
+    property('version', String);
+    property('stage_id', String);
+    property('used_in_stage_flag', String, {default: 'N'});
+    property('date_created', Number);
+    property('date_updated', Number);
+    property('event_name', String);
+    property('stage_name', String);
+    property('draw_status_code_m', String);
+    property('used_in_stage_flag_m', String);
+    property('group_count', Number);
+    setTableName('draws_v');
 });
 

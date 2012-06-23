@@ -1,0 +1,23 @@
+<div class="page-header">
+    <h1>Details of draw</h1>
+</div>
+
+
+<table class="table table-bordered">
+    <tbody>
+        <tr><th>draw_name</th><td><%= draw.draw_name %></td></tr>
+        <tr><th>draw_status_code</th><td><%= draw.draw_status_code %></td></tr>
+        <tr><th>version</th><td><%= draw.version %></td></tr>
+        <tr><th>stage_id</th><td><%= draw.stage_id %></td></tr>
+        <tr><th>used_in_tournament_flag</th><td><%= draw.used_in_tournament_flag %></td></tr>
+        <tr><th>date_creted</th><td><%= draw.date_creted %></td></tr>
+        <tr><th>date_updated</th><td><%= draw.date_updated %></td></tr>    
+    </tbody>
+</table>
+
+<div class="well">
+    <%- link_to('<i class="icon-edit icon-white"></i> Edit', path_to.edit_draw(draw), {class: 'btn btn-primary'}) %>
+    <%- link_to('<i class="icon-remove icon-white"></i> Delete', path_to.draw(draw), {class: 'btn btn-danger', method: 'delete', remote: true, jsonp: '(function (u) { location.href = u; })'}) %>
+    or
+    <%- link_to('Back to index', path_to.draws()) %>
+</div>

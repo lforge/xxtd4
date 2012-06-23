@@ -1,5 +1,5 @@
 // File Name: app/controllers/events_controller.js
-// Purpose: Controller module for Player model.
+// Purpose: Controller module for Event model.
 //
 // Update History
 // Name            Date       Description
@@ -12,6 +12,7 @@
 // Jude Lam        05/06/2012 - Updated index method to use railway-pagination.
 // Jude Lam        05/08/2012 - Added the call to loadStageStatusList in the before flow.
 // Jude Lam        05/16/2012 - Added the use of loadCurrentTournament in before flow.
+// Jude Lam        06/04/2012 - Updated index method to only show current Tournament's Events.
 
 load('application');
 
@@ -70,7 +71,7 @@ action(function index() {
     this.title = v_form_title_p;  // Updated to use new controller level variable.
     var page = req.param('page') || 1;
 
-    Event_v.paginate({order: 'tournament_name, event_start_time', limit: 7, page: page}, function (err, events) {
+    Event_v.paginate({where: {'tournament_id':this.currTournamentId}, order: 'tournament_name, event_start_time', limit: 7, page: page}, function (err, events) {
        if(!err) {
         render({
             events: events

@@ -1,5 +1,5 @@
 // File Name: app/controllers/stages_controller.js
-// Purpose: Controller module for Player model.
+// Purpose: Controller module for Stages model.
 //
 // Update History
 // Name            Date       Description

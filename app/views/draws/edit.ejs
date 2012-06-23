@@ -1,0 +1,9 @@
+<div class="page-header"><h1>Edit draw</h1></div>
+
+<% form_for(draw, {action: path_to.draw(draw), method: 'PUT', id: "draw_form", class: 'form-horizontal'}, function (form) { %>
+    <%- partial('draws/form.ejs', {locals: {form: form, draw: draw}}) %>
+    <div class="form-actions">
+        <%- form.submit('<i class="icon-ok icon-white"></i> Update draw', {class: 'btn btn-primary'}) %> or
+        <%- link_to('Cancel', path_to.draw(draw), {class: 'btn'}) %>
+    </div>
+<% });%>
