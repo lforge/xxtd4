@@ -9,7 +9,7 @@
 load('application');
 
 before(loadDraw, {only: ['show', 'edit', 'update', 'destroy']});
-before(use('loadCurrentTournament'), {only: ['index']});
+before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index', 'show', 'update', 'create']});
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Draw';

@@ -365,6 +365,7 @@ var StageDraws_v = describe('StageDraws_v', function () {
     property('tournament_name', String);
     property('event_name', String);
     property('event_start_time', Number);
+    property('stage_status_code', String);
     property('stage_format_code_m', String);
     property('final_stage_flag_m', String);
     property('stage_status_code_m', String);

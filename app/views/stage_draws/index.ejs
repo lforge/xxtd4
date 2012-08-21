@@ -28,6 +28,7 @@
                         <th>Final Stage?</th>
                         <th>Stage Status</th>
                         <th>Generated</br>Draw for</br>the Stage</th>
+<th>GenerateReady?</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -41,9 +42,12 @@
                             <td><%= stage_draw.final_stage_flag_m %></td>
                             <td><%= stage_draw.stage_status_code_m %></td>
                             <td><%= stage_draw.draw_count %></td>
+<td><%= stage_draw.generate_ready %></td>
                             <td>
                                 <% if (stage_draw.draw_count == 0) { %>
-                                  <%- link_to('<i class="icon-remove icon-white"></i> Generaet Draw', '/stage_draws/' + stage_draw.id + '/generate', {class: 'btn btn-mini'}) %>
+                                  <%- link_to('<i class="icon-remove icon-white"></i> Generate Draw', '/stage_draws/' + stage_draw.id + '/generate', {class: 'btn btn-mini'}) %>
+                                <% } else if (stage_draw.draw_count == 1) { %>
+                                  <%- link_to('<i class="icon-edit"></i> Edit Draw(s)', '/draws/' + stage_draw.id + '/edit', {class: 'btn btn-mini'}) %>
                                 <% } else { %>
                                   <%- link_to('<i class="icon-edit"></i> Edit Draw(s)', '/stage_draws/' + stage_draw.id + '/draws', {class: 'btn btn-mini'}) %>
                                 <% } %>

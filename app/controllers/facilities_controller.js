@@ -16,7 +16,7 @@ load('application');
 before(loadFacility, {only: ['show', 'edit', 'update', 'destroy']});
 before(use('loadStateList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call so that every http request will have access to the state_or_province_list object.
 before(use('loadCountryList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the country_list object.
-before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index','show', 'setDefault']});
+before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index','show', 'create', 'setDefault']});
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Facility';

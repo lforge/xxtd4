@@ -21,7 +21,7 @@ before(loadTournament, {only: ['edit', 'update', 'destroy']});
 before(loadTournament_v, {only: ['show']});
 before(use('loadFacilityList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the facility_list object.
 before(use('loadUSATTStarList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the usatt_star_list object.
-before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index','show', 'setDefault']});
+before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index','show', 'create', 'setDefault']});
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Tournament';

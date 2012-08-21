@@ -22,7 +22,7 @@ before(use('loadAllTournamentList'), {only: ['new', 'edit', 'update', 'create']}
 before(use('loadEventTypeList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the event_type_list object.
 before(use('loadEventOverUnderList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the event_overunder_list object.
 before(use('loadStageStatusList'), {only: ['new', 'edit', 'update', 'create']}); // Added this call to create the stage_status_list object.
-before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index','show', 'setDefault']});
+before(use('loadCurrentTournament'), {only: ['new', 'edit', 'index','show', 'create', 'setDefault']});
 
 // adding a singleton name and plural name for title setup and other message.
 var v_form_title_s = 'Event';
@@ -73,9 +73,7 @@ action(function index() {
 
     Event_v.paginate({where: {'tournament_id':this.currTournamentId}, order: 'tournament_name, event_start_time', limit: 7, page: page}, function (err, events) {
        if(!err) {
-        render({
-            events: events
-        });
+        render({events: events});
        }
     });
 
